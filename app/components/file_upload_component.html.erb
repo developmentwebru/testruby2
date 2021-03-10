@@ -1,0 +1,23 @@
+<%# Display validation errors %>
+<% if @model_instance.errors[@nested_attributes_name].any? %>
+  <%= render(ValidationErrorsComponent.new(errors: @model_instance.errors[@nested_attributes_name])) %>
+<% elsif @model_instance.errors["#{@nested_attributes_name}.image"].any? %>
+  <%= render(ValidationErrorsComponent.new(errors: @model_instance.errors["#{@nested_attributes_name}.image"])) %>
+<% end %>
+
+<div class="file-upload">
+  <div class="file-upload-hidden-fields"></div>
+  <div class="__file-upload-cached-form-data">
+    <%= @form.fields_for @nested_attributes_name.to_sym do |ff| %>
+      <%= ff.hidden_field :image, value: ff.object.cached_image_data %>
+
+      <% if @display_previews_and_destroy && ff.object.image_url %>
+        <%= image_tag ff.object.image_url, class: "rounded d-block", style: "max-height: 100px" %>
+        <%= ff.check_box :_destroy %>
+        <%= ff.label :_destroy, "Удалить фото", class: "text-danger", style: "font-size: 14px" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="file-upload-target" data-model-name="<%= @model_name %>" data-nested-attributes-name="<%= @nested_attributes_name %>" data-max-files="<%= @max_files %>"></div>
+</div>

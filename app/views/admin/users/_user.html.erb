@@ -1,0 +1,39 @@
+<div class="card card-body mb-2">
+  <h5 class="card-title">
+    <%= user.profile&.first_name %>
+    <%= user.profile&.last_name %>
+    <%= link_to "edit", edit_admin_user_path(user), target: :blank %>
+    <small class="text-muted">
+      #<%= user.id %> &nbsp;
+      signed up at <%= user.created_at.to_s(:long) %>
+    </small>
+    <% if user.admin? || user.super_admin? %>
+      <i class="fas fa-star text-warning"></i>
+    <% end %>
+  </h5>
+  <h6 class="card-subtitle mb-2 text-muted"><%= user.email %></h6>
+  
+  <p class="card-text">
+    <i class="fas fa-phone-alt text-muted"></i>
+    <%= user.profile&.phone %>
+
+    <i class="ml-3 fas fa-map text-muted mr-1"></i>
+    <%= user.profile&.address %>,
+    <%= user.profile&.city %>
+
+    <span class="ml-2">
+      <% user.profile&.passport_photos&.each do |photo| %>
+        <%= link_to photo.image_url, target: :blank do %>
+          <i class="fas fa-image text-muted"></i>
+          passport photo
+        <% end %>
+      <% end %>
+    </span>
+
+    <% if current_user.super_admin? %>
+      <span class="ml-3">
+        <%= link_to "become", become_admin_user_path(id: user.id), 'data-turbolinks': false %>
+      </span>
+    <% end %>
+  </p>
+</div>

@@ -1,0 +1,40 @@
+<% if shipment.status_arrived? %>
+  <tr>
+<% else %>
+  <tr style="background: #fffbdd">
+<% end %>
+  <th class="text-nowrap align-middle" scope="row">
+    <%= shipment.created_at.strftime("%d-%m-%Y") %>
+    <small class="text-muted"><%= shipment.created_at.strftime("%T") %></small>
+  </th>
+  <td class="text-nowrap align-middle"><%= shipment.packages.size %></td>
+  <td class="text-nowrap align-middle"><strong><%= shipment.packages.sum(:weight) %> <%= t("weight_kg") %></strong></td>
+  <td class="text-nowrap align-middle">
+    <% if shipment.status_arrived? %>
+      В Бишкеке
+    <% else %>
+      <div class="input-group">
+        <input type="text" class="form-control form-control-sm" style="max-width: 180px" readonly value="<%= t("activerecord.attributes.shipment.status.#{shipment.status}") %>">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to t("activerecord.attributes.shipment.status.in_transit"), set_as_in_transit_admin_shipment_path(shipment), method: :patch, class: "dropdown-item" %>
+            <%= link_to t("activerecord.attributes.shipment.status.arrived"), set_as_arrived_admin_shipment_path(shipment), method: :patch, class: "dropdown-item" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </td>
+  <td class="text-nowrap align-middle">
+    <%= link_to "Инвойс", invoice_admin_shipment_path(format: :xlsx, id: shipment), 'data-turbolinks': "false", class: "btn btn-sm btn-outline-primary mr-1" %>
+    <%= link_to "CP-71", list_cp71_admin_shipment_path(shipment), 'data-turbolinks': "false", target: "_blank", class: "btn btn-sm btn-outline-primary mr-1" %>
+    <%= link_to "Реестр грузов", invoice_register_admin_shipment_path(format: :xlsx, id: shipment), 'data-turbolinks': "false", class: "btn btn-sm btn-outline-primary" %>
+  </td>
+  <td class="text-nowrap align-middle">
+    <%= simple_form_for [:admin, shipment] do |f| %>
+      <%= f.input :air_waybill, label: false, input_html: { class: "form-control-sm" } %>
+    <% end %>
+  </td>
+</tr>

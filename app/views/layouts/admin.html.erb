@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+      <% if content_for?(:title) %>
+        <%= yield :title %> ·
+      <% end %>
+      Admin <%= SiteConfig.site_country_code %> <%= SiteConfig.site_name_short %>
+    </title>
+    <meta name="description" content="Быстрая доставка товаров и посылок из США в Бишкек, Кыргызстан">
+
+    <link rel="icon" href="/favicon.png">
+    <link rel="mask-icon" href="/mask-icon.svg" color="#5856d6">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag "admin", "data-turbolinks-track": "reload" %>
+    <%= javascript_pack_tag "admin", "data-turbolinks-track": "reload" %>
+  </head>
+
+  <body>
+    <%= render "admin/shared/navbar" %>
+    <%= render "admin/shared/shipment_next_date" %>
+
+    <div class="container">
+      <%= render "shared/alerts_bootstrap" %>
+    </div>
+
+    <main>
+      <div class="container my-5">
+        <%= yield %>
+      </div>
+    </main>
+
+    <%# TODO: Add footer %>
+    <% if false %>
+      <%= render "shared/footer" %>
+    <% end %>
+  </body>
+</html>

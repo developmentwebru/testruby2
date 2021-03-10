@@ -1,0 +1,2 @@
+.logo { @apply inline-flex items-center text-indigo; }
+.logo:hover { @apply no-underline; }

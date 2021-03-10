@@ -1,0 +1,115 @@
+<%= simple_form_for [:admin, @package], defaults: { wrapper: false } do |f| %>
+<div class="js-uppy-images" data-controller="admin--user-suite-number">
+  <%# Tracking, Suite # %>
+  <div class="form-row">
+    <div class="form-group col-12 col-md-9">
+      <%= f.input :tracking %>
+    </div>
+
+    <% if @package.new_record? %>
+      <div class="form-group col-6 col-md-3">
+        <label for="user_suite_number">Suite #</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><%= SiteConfig.site_country_code %></span>
+          </div>
+          <input id="user_suite_number" type="text" data-target="admin--user-suite-number.input" data-action="keyup->admin--user-suite-number#findUser" autocomplete="off" class="form-control">
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# User || Guest: First name, Last name & Weight %>
+  <% if @package.user %>
+    <div class="form-row">
+      <div class="form-group col-md-5">
+        <%= label_tag "user_first_name", "Имя" %>
+        <%= text_field_tag "user_first_name", @package.user.profile.first_name, disabled: true, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-5">
+        <%= label_tag "user_last_name", "Фамилия" %>
+        <%= text_field_tag "user_last_name", @package.user.profile.last_name, disabled: true, class: "form-control" %>
+      </div>
+      <div class="form-group col-6 col-md-2">
+        <%= f.input :weight, required: true, autofocus: true %>
+      </div>
+    </div>
+  <% else %>
+    <%= f.simple_fields_for :guest do |g| %>
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <%= render(AutocompleteComponent.new(form_object: g, input_name: :first_name, url: admin_autocomplete_first_name_url, stimulus_targets: "admin--user-suite-number.firstName")) %>
+        </div>
+        <div class="form-group col-md-5">
+           <%= render(AutocompleteComponent.new(form_object: g, input_name: :last_name, url: admin_autocomplete_last_name_url, stimulus_targets: "admin--user-suite-number.lastName")) %>
+        </div>
+        <div class="form-group col-6 col-md-2">
+          <%= f.input :weight, required: true %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# Package items, link to collapse package photos %>
+  <div data-controller="nested-form">
+    <template data-target="nested-form.template">
+      <%= f.simple_fields_for :package_items, PackageItem.new, child_index: "NEW_RECORD" do |package_item| %>
+        <%= render "package_item_fields", form: package_item %>
+      <% end %>
+    </template>
+
+    <%= f.simple_fields_for :package_items do |package_item| %>
+      <%= render "package_item_fields", form: package_item %>
+    <% end %>
+
+    <div data-target="nested-form.links">
+      <%= link_to "Добавить товар", "#", class: "btn btn-outline-primary btn-sm", data: { action: "click->nested-form#add_association" } %>
+    </div>
+  </div>
+
+  <%# Package photos %>
+  <div class="form-group mt-3">
+    <%= f.label :package_photos, t("activerecord.models.package_photo") %>
+    <%= render(FileUploadComponent.new(
+      form: f,
+      model_name: "package",
+      model_instance: @package,
+      nested_attributes_name: "package_photos",
+      max_files: 5,
+      display_previews_and_destroy: true
+    )) %>
+
+    <% if false %>
+      <%# Hide QR code when adding new package, since we don't have URL for it, also hide QR code on mobile %>
+      <% unless @package.new_record? %>
+        <button type="button" class="d-none d-md-inline-block ml-2 btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal_qrcode">
+          <i class="fas fa-qrcode"></i> <%= t("uploads.qrcode") %>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%# Form controls %>
+  <%= f.button :submit, class: "mr-1" %>
+  <%= link_to t("cancel"), admin_packages_path, class: "btn btn-outline-secondary" %>
+</div>
+<% end %>
+
+<!-- QR code modal -->
+<div class="modal fade" id="modal_qrcode" tabindex="-1" role="dialog" aria-labelledby="modal_qrcode_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_qrcode_label"><%= t("uploads.qrcode_package") %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if @qr %>
+          <%= raw @qr.as_svg(offset: 0, color: '000', shape_rendering: 'crispEdges', module_size: 4) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

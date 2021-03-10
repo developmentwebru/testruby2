@@ -1,0 +1,21 @@
+ru:
+  admin:
+    pages:
+      index:
+        title: "Страницы"
+        add_page: "Добавить страницу"
+      new:
+        title: "Добавить страницу"
+      create:
+        notice: "Страница добавлена"
+      edit:
+        title: "Редактировать страницу"
+      update:
+        notice: "Страница обновлена"
+      destroy:
+        alert: "Страница удалена"
+  helpers:
+    submit:
+      page:
+        create: "Добавить страницу"
+        update: "Сохранить изменения"

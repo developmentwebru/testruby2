@@ -1,0 +1,26 @@
+<% if @package %>
+  <div class="w-full relative border rounded px-4 py-3 mb-4">
+    <div class="flex items-center">
+      <h3 class="mr-2"><%= @package.tracking %></h3>
+      <% if @package.weight %>
+        <span class="bg-yellow-light rounded px-1 mr-2">
+          <%= @package.weight %>
+          <%= t("weight_kg") %>
+        </span>
+      <% end %>
+
+      <% if @package.shipment %>
+        <span class="bg-indigo rounded px-1 text-white">
+          <%= t("activerecord.attributes.shipment.status.#{@package.shipment.status}") %>
+          (<%= @package.shipment.created_at.to_date.strftime("%d-%m-%Y") %>)
+        </span>
+      <% else %>
+        <span class="bg-blue-light rounded px-1 text-white">
+          <%= t("activerecord.attributes.package.status_warehouse.#{@package.status_warehouse}") %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+<% elsif params[:q] %>
+  <h3>Трек-номер не найден</h3>
+<% end %>

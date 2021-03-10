@@ -1,0 +1,8 @@
+// Bootstrap
+$grid-gutter-width: 20px !default;
+.badge-font-500 { font-weight: 500 !important; }
+@import "~bootstrap/scss/bootstrap";
+
+// Components
+@import "package";
+@import "admin/autocomplete";

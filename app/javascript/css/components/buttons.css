@@ -1,0 +1,46 @@
+.btn {
+  @apply
+    inline-block
+    whitespace-normal
+    leading-normal
+    cursor-pointer
+    text-center
+    bg-white
+    text-black
+    border
+    rounded-full
+    py-2 px-3
+    select-none;
+}
+
+.btn:hover {
+  @apply
+    no-underline
+    bg-grey-lightest;
+}
+
+.btn:active {
+  @apply
+    bg-grey-lightest;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+.btn-sm {
+  @apply
+    text-sm
+    py-1 px-2;
+}
+
+
+.btn-primary {
+  @apply bg-green border-green text-white;
+}
+
+.btn-primary:hover {
+  @apply bg-green-dark border-green-dark;
+}
+
+.btn-primary:active {
+  @apply bg-green-dark border-green-dark;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}

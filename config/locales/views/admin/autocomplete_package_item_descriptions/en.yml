@@ -1,0 +1,6 @@
+en:
+  admin:
+    autocomplete_package_item_descriptions:
+      index:
+        title: "Package descriptions for autocomplete"
+        add: "Add"

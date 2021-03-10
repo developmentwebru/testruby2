@@ -1,0 +1,18 @@
+en:
+  admin:
+    news:
+      index:
+        title: "News"
+        add_news: "Add news"
+      new:
+        title: "Add news"
+      create:
+        notice: "News created"
+      edit:
+        title: "Edit news"
+      update:
+        notice: "News updated"
+      destroy:
+        alert: "News deleted"
+      form:
+        notify_users: "Send email notification to users"

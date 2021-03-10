@@ -1,0 +1,16 @@
+ru:
+  navbar:
+    find_tracking: "Поиск трек-номера"
+    services: "Услуги"
+    about_us: "О нас"
+    pricing: "Тарифы"
+    terms: "Правила и условия"
+    prohibited_items: "Товары запрещенные к пересылке"
+    working_hours: "График работы"
+    news: "Новости"
+    contact_us: "Контакты"
+    packages: "Посылки"
+    our_us_address: "Наш адрес в США"
+    my_us_address: "Мой адрес в США"
+    account: "Аккаунт"
+    logout: "Выйти"

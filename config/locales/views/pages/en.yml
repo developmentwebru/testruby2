@@ -1,0 +1,25 @@
+en:
+  pages:
+    index:
+      buy_from_any_online_stores: "Buy from any online U.S. stores"
+      we_will_deliver_your_orders: "We will deliver your orders in 5-7 days for <span class='bg-yellow-light'>%{shipping_local}/kg (%{shipping_usd}/kg)</span>"
+      signup_and_receive_address: "1. Sign up and receive your free U.S. address in Delaware"
+      make_orders: "2. Make orders at any online stores using your U.S. address"
+      ship_your_orders_to_warehouse: "3. Ship your orders to your U.S. address at our warehouse"
+      we_deliver_your_packages: "4. We deliver packages to you in just 5-7 days"
+      our_services: "Our services"
+      delivery_from_us: "Delivery for your packages from U.S. in 5-7 days for 630kgs/kg ($9/kg)"
+      package_insurance: "Insurance for your packages for 10% of declared cost"
+      package_photos: "Detailed photos of package contents $1 for 2 photos"
+      repacking: "Packages repacking to save weight, consolidation are FREE"
+      assisted_purchase: "Assisted purchase using our U.S. issued card - 7% of total cost"
+      prepaid_cards: "VISA prepaid cards, online stores gift cards"
+      get_access_to_top_brands: "Get access to top brands with %{site_name_short}"
+    find_tracking:
+      title: "Find tracking"
+      how_to: "Please enter full tracking number or last 6 digits of tracking number to find status of your package"
+      tracking: "Tracking number"
+      search: "Search"
+      status_usa: "At USA Warehouse"
+      status_in_tranist: "In transit to USA warehouse"
+      not_found: "Tracking not found"

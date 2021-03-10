@@ -1,0 +1,24 @@
+ru:
+  packages:
+    index:
+      shipment_next_date_label: "Дата отправления посылок"
+      shipment_next_date_label_new: "Следующее отправление посылок"
+      title: "Посылки"
+      add_package: "Добавить посылку"
+    new:
+      title: "Добавить посылку"
+    create:
+      notice: "Посылка добавлена"
+    destroy:
+      alert: "Посылка удалена"
+    form:
+      add_package_item: "Добавить товар"
+    expected: "Ожидаемые"
+    warehouse: "На складе"
+    in_transit: "В пути"
+    arrived: "Прибывшие"
+  helpers:
+    submit:
+      package:
+        create: "Добавить посылку"
+        update: "Сохранить посылку"

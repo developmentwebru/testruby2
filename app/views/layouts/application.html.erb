@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+      <% if content_for?(:title) %>
+        <%= yield :title %> ·
+      <% end %>
+      <%= SiteConfig.site_name_short %>
+    </title>
+    <meta name="description" content="Быстрая доставка товаров и посылок из США в Бишкек, Кыргызстан">
+
+    <link rel="icon" href="/favicon.png">
+    <link rel="mask-icon" href="/mask-icon.svg" color="#5856d6">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag "tailwind", "data-turbolinks-track": "reload" %>
+    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
+  </head>
+
+  <body class="font-sans font-normal text-base text-els-black leading-normal">
+    <%= render "shared/navbar_tailwind" %>
+
+    <% if News.any? %>
+      <div class="border-t border-b py-2 text-center">
+        <%= link_to News.last.title, news_path(News.last.id) %>
+      </div>
+    <% end %>
+
+    <div class="max-w-lg mx-auto px-8 py-8 mb-16">
+      <%= render "shared/alerts_new" %>
+      <%= yield %>
+    </div>
+
+    <div class="px-8 pt-12 border-t">
+      <%= render "shared/footer_tailwind" %>
+    </div>
+  </body>
+</html>

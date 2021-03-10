@@ -1,0 +1,11 @@
+<%= 
+  render partial: "cp71",
+  collection: @shipment.users, as: :owner,
+  locals: { shipment: @shipment }
+%>
+
+<%= 
+  render partial: "cp71",
+  collection: @shipment.guests, as: :owner,
+  locals: { shipment: @shipment }
+%>

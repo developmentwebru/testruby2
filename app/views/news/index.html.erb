@@ -1,0 +1,10 @@
+<h1 class="mb-3">Новости</h1>
+
+<% @news.each do |news| %>
+  <div>
+    <h2>
+      <a href="<%= news_path(news.id) %>"><%= news.title %></a>
+      <small class="text-xs"><%= news.created_at.strftime("%d-%m-%Y") %></small>
+    </h2>
+  </div>
+<% end %>

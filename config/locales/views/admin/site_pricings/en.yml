@@ -1,0 +1,7 @@
+en:
+  admin:
+    site_pricings:
+      edit:
+        title: "Edit pricing"
+      update:
+        notice: "Pricing updated"

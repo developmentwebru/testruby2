@@ -1,0 +1,28 @@
+en:
+  admin:
+    packages:
+      index:
+        title: "Packages"
+        add_or_edit: "Add or edit"
+        tracking: "Tracking number"
+        search_by_name_placeholder: "First or Last name"
+        search_by_name: "Search"
+        search_placeholder: "Tracking number"
+        search: "Search"
+        reset_search: "Reset search"
+      new:
+        title: "Add package"
+      edit:
+        title: "Edit package"
+      create:
+        notice: "Package added"
+      update:
+        notice: "Package updated"
+      destroy:
+        alert: "Package deleted"
+      set_as_received:
+        notice: "Package %{tracking_number} received"
+        alert: "Package %{tracking_number} is already received"
+      form:
+        add_package_item: "Add item"
+        package_photos: "Package photos"

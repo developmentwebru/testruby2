@@ -1,0 +1,7 @@
+ru:
+  admin:
+    site_pricings:
+      edit:
+        title: "Изменить тарифы"
+      update:
+        notice: "Тарифы обновлены"

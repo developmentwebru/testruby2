@@ -1,0 +1,441 @@
+# TO-DO: remove USD conversion rate
+kgs_to_usd = 79
+
+s = xlsx_styles
+wb = xlsx_package.workbook
+wb.add_worksheet do |sheet|
+  sheet.add_row [
+    "Пассажирская таможенная декларация для экспресс-грузов", # A1
+    nil, # B1
+    nil, # C1
+    nil, # D1
+    nil, # E1
+    nil, # F1
+    nil, # G1
+    nil, # H1
+    nil, # I1
+    nil, # J1
+    nil, # K1
+    nil, # L1
+    nil, # M1
+    nil, # N1
+    nil, # O1
+    nil, # P1
+    nil  # Q1
+  ], height: 40
+
+  sheet.merge_cells "A1:Q1"
+  sheet.add_border "A1:Q1"
+  sheet.add_style "A1:Q1", s[:v_center], s[:h_center], s[:wrap_text]
+
+  sheet.add_row [
+    "Отправитель (по общей накладной) \r\n\r\n" \
+    "#{SiteConfig.customs_forms_fill[:from_company]} \r\n" \
+    "#{SiteConfig.customs_forms_fill[:from_address]}, #{SiteConfig.customs_forms_fill[:from_city]} \r\n" \
+    "#{SiteConfig.customs_forms_fill[:from_state]} \r\n" \
+    "#{SiteConfig.customs_forms_fill[:from_phone]}", # A2
+    nil, # B2
+    nil, # C2
+    nil, # D2
+    nil, # E2
+    "Получатель (по общей накладной) \r\n\r\n" \
+    "#{SiteConfig.customs_forms_fill[:to_company]} \r\n" \
+    "#{SiteConfig.customs_forms_fill[:to_address]} \r\n" \
+    "#{SiteConfig.customs_forms_fill[:to_phone]}", # F2
+    nil, # G2
+    nil, # H2
+    nil, # I2
+    nil, # J2
+    "А", # K2
+    nil, # L2
+    nil, # M2
+    nil, # N2
+    nil, # O2
+    "ПТДЭГ", # P2
+    "Особенность" # Q2
+  ], height: 50
+
+  sheet.add_row [
+    nil, # A3
+    nil, # B3
+    nil, # C3
+    nil, # D3
+    nil, # E3
+    nil, # F3
+    nil, # G3
+    nil, # H3
+    nil, # I3
+    nil, # J3
+    "Предшествующий документ", # K3
+    nil, # L3
+    nil, # M3
+    nil, # N3
+    nil, # O3
+    "Кол-во листов", # P3
+    nil  # Q3
+  ], height: 50
+
+  sheet.merge_cells "A2:E3" # Отправитель (по общей накладной)
+  sheet.merge_cells "F2:J3" # Получатель (по общей накладной)
+  sheet.merge_cells "K2:O2" # A
+  sheet.merge_cells "K3:O3" # Предшествующий документ
+  sheet.merge_cells "P3:Q3" # Кол-во листов
+
+  sheet.add_border "A2:E3" # Отправитель (по общей накладной)
+  sheet.add_border "F2:J3" # Получатель (по общей накладной)
+  sheet.add_border "K2:P2" # A
+  sheet.add_border "P2:Q2" # ПТДЭГ / Особенность
+  sheet.add_border "K3:P3" # Предшествующий документ
+  sheet.add_border "P3:Q3" # Кол-во листов
+
+  sheet.add_style "A2:O2", s[:v_top], s[:wrap_text] # Отправитель, получатель, А
+  sheet.add_style "K3:O3", s[:v_top], s[:wrap_text] # Отправитель, получатель, Предшествующий документ
+
+  sheet.add_style "P2:Q3", s[:v_center], s[:h_center], s[:wrap_text] # ПТДЭГ / Особенность, Кол-во листов
+
+  sheet.add_row [
+    "Общие сведения", # A4
+    nil, # B4
+    nil, # C4
+    nil, # D4
+    nil, # E4
+    "Сведения о товарах", # F4
+    nil, # G4
+    nil, # H4
+    nil, # I4
+    nil, # J4
+    nil, # K4
+    nil, # L4
+    "Сведения о документах", # M4
+    nil, # N4
+    nil, # O4
+    "Примечание", # P4
+    nil  # Q4
+  ], height: 40
+
+  sheet.merge_cells "A4:E4" # Общие сведения
+  sheet.merge_cells "F4:L4" # Сведения о товарах
+  sheet.merge_cells "M4:O4" # Сведения о документах
+  sheet.merge_cells "P4:Q4" # Примечание
+
+  sheet.add_border "A4:E4" # Общие сведения
+  sheet.add_border "F4:L4" # Сведения о товарах
+  sheet.add_border "M4:O4" # Сведения о документах
+  sheet.add_border "P4:Q4" # Примечание
+
+  sheet.add_style "A4:Q4", s[:v_center], s[:h_center], s[:wrap_text] # Общие сведения -> Примечание
+
+  sheet.add_row [
+    "№\nп/п", # A5
+    "Общая\nнакладная", # B5
+    "Инд.\nнакладная", # C5
+    "Инд.\nотправитель", # D5
+    "Инд.\nполучатель", # E5
+    "№\nп/п", # F5
+    "Наименование", # G5
+    "Код\nТН ВЭД\nЕАЭС", # H5
+    "Кол-во", # I5
+    "Вес\nбрутто", # J5
+    "Валюта (USD),\nстоимость", # K5
+    "Валюта (СОМ),\nстоимость\n в валюте\nгосударства члена", # L5
+    "Код,\nпризнак", # M5
+    "Дата,\nномер", # N5
+    nil, # O5
+    " ", # P5
+    " ", # Q5
+  ], height: 65
+
+  sheet.merge_cells "N5:O5" # Дата, номер
+
+  sheet.add_border "A5:B5" # № п/п
+  sheet.add_border "B5:C5" # Общая накладная
+  sheet.add_border "C5:D5" # Инд. накладная
+  sheet.add_border "D5:E5" # Инд. отправитель
+  sheet.add_border "E5:F5" # Инд. получатель
+  sheet.add_border "F5:G5" # № п/п
+  sheet.add_border "G5:H5" # Наименование
+  sheet.add_border "H5:I5" # Код ТН ВЭД ЕАЭС
+  sheet.add_border "I5:J5" # Кол-во
+  sheet.add_border "J5:K5" # Вес брутто
+  sheet.add_border "K5:L5" # Валюта (USD), стоимость
+  sheet.add_border "L5:M5" # Валюта (СОМ), стоимость в валюте государства члена
+  sheet.add_border "M5:N5" # Код, признак
+  sheet.add_border "N5:O5" # Дата, номер
+
+  sheet.add_style "A5:P5", s[:v_center], s[:h_center], s[:wrap_text] # № п/п -> Дата, номер
+
+  sheet.add_row [
+    "1",  # A6
+    "2",  # B6
+    "3",  # C6
+    "4",  # D6
+    "5",  # E6
+    "6",  # F6
+    "7",  # G6
+    "8",  # H6
+    "9",  # I6
+    "10", # J6
+    "11", # K6
+    "12", # L6
+    "13", # M6
+    "14", # N6
+    " ",  # O6
+    nil,  # P6
+    nil   # Q6
+  ]
+
+  sheet.merge_cells "P5:Q6" # empty
+
+  sheet.add_border "A6:B6" # 1
+  sheet.add_border "B6:C6" # 2
+  sheet.add_border "C6:D6" # 3
+  sheet.add_border "D6:E6" # 4
+  sheet.add_border "E6:F6" # 5
+  sheet.add_border "F6:G6" # 6
+  sheet.add_border "G6:H6" # 7
+  sheet.add_border "H6:I6" # 8
+  sheet.add_border "I6:J6" # 9
+  sheet.add_border "J6:K6" # 10
+  sheet.add_border "K6:L6" # 11
+  sheet.add_border "L6:M6" # 12
+  sheet.add_border "M6:N6" # 13
+  sheet.add_border "N6:O6" # 14
+  sheet.add_border "O6:P6" # " "
+  sheet.add_border "P5:Q6" # empty, merged
+
+  sheet.add_style "A6:Q6", s[:v_center], s[:h_center], s[:wrap_text] # 1 -> merged P5:Q6
+
+  # Users data start from row 7
+  user_start_row = 7
+  @packages.each.with_index(1) do |(user, packages), user_index|
+    first_package = packages.first
+    first_package_item = first_package.package_items.first
+
+    sheet.add_row [
+      user_index, # Auser_start_row
+      @shipment.air_waybill, # Buser_start_row
+      "US#{'%04d' % user_index}", # Cuser_start_row
+      SiteConfig.customs_forms_fill[:from_company], # Duser_start_row
+      user, # Euser_start_row
+      1, # Fuser_start_row (first package & first package.package_item)
+      first_package_item.description == "clothes" ? clothes_sample : first_package_item.description, # Guser_start_row
+      package_item_description_code(first_package_item.description), # Huser_start_row
+      first_package_item.qty, # Iuser_start_row
+      first_package.weight, # Juser_start_row
+      first_package_item.price.to_s, # Kuser_start_row
+      (first_package_item.price * kgs_to_usd).round(2).to_s, # Luser_start_row
+      nil, # Muser_start_row
+      @shipment.created_at.to_date.to_s, # Nuser_start_row
+      nil, # Ouser_start_row
+      nil, # Puser_start_row
+      nil  # Quser_start_row
+    ], types: [
+      nil,      # A user_index
+      :string,  # B air_waybill
+      nil,      # C US00xx
+      nil,      # D from_company
+      nil,      # E user
+      nil,      # F package_item index
+      :text,    # G package_item description
+      :string,  # H package_item description customs code
+      nil,      # I qty
+      nil,      # J weight
+      nil,      # K price USD
+      nil,      # L price KGS
+      nil,      # M nil
+      :string,  # N shipment_date
+      nil,      # O nil
+      nil,      # P nil
+      nil       # Q nil
+    ]
+
+    # Add borders for first_package_item
+    sheet.add_border "F#{user_start_row}:G#{user_start_row}"
+    sheet.add_border "G#{user_start_row}:H#{user_start_row}"
+    sheet.add_border "H#{user_start_row}:I#{user_start_row}"
+    sheet.add_border "I#{user_start_row}:J#{user_start_row}"
+    sheet.add_border "J#{user_start_row}:K#{user_start_row}"
+    sheet.add_border "K#{user_start_row}:L#{user_start_row}"
+    sheet.add_border "L#{user_start_row}:M#{user_start_row}"
+    sheet.add_border "M#{user_start_row}:N#{user_start_row}"
+    sheet.add_border "N#{user_start_row}:O#{user_start_row}"
+    sheet.add_border "O#{user_start_row}:P#{user_start_row}"
+    sheet.add_border "P#{user_start_row}:Q#{user_start_row}"
+
+    # Filled with data: № п/п -> Дата, номер -> empty cells
+    sheet.add_style "A#{user_start_row}:Q#{user_start_row}", s[:v_center], s[:h_center], s[:wrap_text]
+
+    # Set package_item_count to 1 because at least we have 1 package for user with at least 1 package_item
+    package_item_count = 1
+    packages.each do |package|
+      package.package_items.each_with_index do |package_item, package_item_index_weight_check|
+        sheet.add_row [
+          nil, # A user_start_row + packages.each i + package.package_items.each i
+          nil, # B ^ see above
+          nil, # C ^ see above
+          nil, # D ^ see above
+          nil, # E ^ see above
+          package_item_count, # F ^ see above
+          package_item.description == "clothes" ? clothes_sample : package_item.description, # G ^ see above
+          package_item_description_code(package_item.description), # H ^ see above
+          package_item.qty, # I ^ see above
+          package_item_index_weight_check == 0 ? package.weight : "-", # J ^ see above
+          package_item.price.to_s, # K ^ see above
+          (package_item.price * kgs_to_usd).round(2).to_s, # L ^ see above
+          nil, # M ^ see above
+          @shipment.created_at.to_date.to_s, # N ^ see above
+          nil, # O ^ see above
+          nil, # P ^ see above
+          nil  # Q ^ see above
+        ], types: [
+          nil,      # A user_index
+          :string,  # B air_waybill
+          nil,      # C US00xx
+          nil,      # D from_company
+          nil,      # E user
+          nil,      # F package_item index
+          :text,    # G package_item description
+          :string,  # H package_item description customs code
+          nil,      # I qty
+          nil,      # J weight
+          nil,      # K price USD
+          nil,      # L price KGS
+          nil,      # M nil
+          :string,  # N shipment_date
+          nil,      # O nil
+          nil,      # P nil
+          nil       # Q nil
+        ]
+
+        # № п/п -> Дата, номер -> empty cells
+        sheet.add_border "F#{user_start_row + package_item_count}:G#{user_start_row + package_item_count}"
+        sheet.add_border "G#{user_start_row + package_item_count}:H#{user_start_row + package_item_count}"
+        sheet.add_border "H#{user_start_row + package_item_count}:I#{user_start_row + package_item_count}"
+        sheet.add_border "I#{user_start_row + package_item_count}:J#{user_start_row + package_item_count}"
+        sheet.add_border "J#{user_start_row + package_item_count}:K#{user_start_row + package_item_count}"
+        sheet.add_border "K#{user_start_row + package_item_count}:L#{user_start_row + package_item_count}"
+        sheet.add_border "L#{user_start_row + package_item_count}:M#{user_start_row + package_item_count}"
+        sheet.add_border "M#{user_start_row + package_item_count}:N#{user_start_row + package_item_count}"
+        sheet.add_border "N#{user_start_row + package_item_count}:O#{user_start_row + package_item_count}"
+        sheet.add_border "O#{user_start_row + package_item_count}:P#{user_start_row + package_item_count}"
+        sheet.add_border "P#{user_start_row + package_item_count}:Q#{user_start_row + package_item_count}"
+
+        # № п/п -> Дата, номер -> empty cells
+        sheet.add_style "F#{user_start_row + package_item_count}:Q#{user_start_row + package_item_count}", s[:v_center], s[:h_center], s[:wrap_text]
+
+        package_item_count += 1
+      end
+    end
+
+    # Merge sender/receiver/first_package_item with packages.each > package.package_items.first
+    sheet.merge_cells "F#{user_start_row}:F#{user_start_row + 1}" # № п/п
+    sheet.merge_cells "G#{user_start_row}:G#{user_start_row + 1}" # Наименование
+    sheet.merge_cells "H#{user_start_row}:H#{user_start_row + 1}" # Код ТН ВЭД ЕАЭС
+    sheet.merge_cells "I#{user_start_row}:I#{user_start_row + 1}" # Кол-во
+    sheet.merge_cells "J#{user_start_row}:J#{user_start_row + 1}" # Вес брутто
+    sheet.merge_cells "K#{user_start_row}:K#{user_start_row + 1}" # Валюта (USD), стоимость
+    sheet.merge_cells "L#{user_start_row}:L#{user_start_row + 1}" # Валюта (СОМ), стоимость в валюте государства члена
+    sheet.merge_cells "M#{user_start_row}:M#{user_start_row + 1}" # Код, признак
+    sheet.merge_cells "N#{user_start_row}:N#{user_start_row + 1}" # Дата, номер
+    sheet.merge_cells "O#{user_start_row}:O#{user_start_row + 1}" # empty cell
+    sheet.merge_cells "P#{user_start_row}:P#{user_start_row + 1}" # empty cell
+    sheet.merge_cells "Q#{user_start_row}:Q#{user_start_row + 1}" # empty cell
+
+    sheet.add_row [
+      nil, # A user_start_row + package_item_count
+      "Всего по индивидуальной накладной\r\n(общий вес брутто, стоимость в валюте государства-члена)", # B ^ see above
+      nil, # C ^ see above
+      nil, # D ^ see above
+      nil, # E ^ see above
+      nil, # F ^ see above
+      nil, # G ^ see above
+      nil, # H ^ see above
+      nil, # I ^ see above
+      packages.sum(&:weight), # J ^ see above
+      packages.reduce(0) { |sum, package| sum += package.package_items.sum(&:price) }.to_s, # K ^ see above
+      packages.reduce(0) { |sum, package| sum += package.package_items.sum(&:price) * kgs_to_usd.round(2) }.to_s, # L ^ see above
+      nil, # M ^ see above
+      @shipment.created_at.to_date.to_s, # N ^ see above
+      nil, # O ^ see above
+      nil, # P ^ see above
+      nil  # Q ^ see above
+    ], height: 30
+
+    # Merge sender/receiver cells vertically by package_item_count
+    sheet.merge_cells "A#{user_start_row}:A#{user_start_row + package_item_count}"     # № п/п
+    sheet.merge_cells "B#{user_start_row}:B#{user_start_row + package_item_count - 1}" # Общая накладная
+    sheet.merge_cells "C#{user_start_row}:C#{user_start_row + package_item_count - 1}" # Инд. накладная
+    sheet.merge_cells "D#{user_start_row}:D#{user_start_row + package_item_count - 1}" # Инд. отправитель
+    sheet.merge_cells "E#{user_start_row}:E#{user_start_row + package_item_count - 1}" # Инд. получатель
+
+    sheet.add_border "A#{user_start_row}:A#{user_start_row + package_item_count}"      # № п/п
+    sheet.add_border "B#{user_start_row}:B#{user_start_row + package_item_count - 1}"  # Общая накладная
+    sheet.add_border "C#{user_start_row}:C#{user_start_row + package_item_count - 1}"  # Инд. накладная
+    sheet.add_border "D#{user_start_row}:D#{user_start_row + package_item_count - 1}"  # Инд. отправитель
+    sheet.add_border "E#{user_start_row}:E#{user_start_row + package_item_count - 1}"  # Инд. получатель
+
+    # Всего по индивидуальной накладной (общий вес брутто, стоимость в валюте государства-члена)
+    sheet.merge_cells "B#{user_start_row + package_item_count}:I#{user_start_row + package_item_count}"
+
+    sheet.add_border "B#{user_start_row + package_item_count}:I#{user_start_row + package_item_count}" # Всего по инд. накладной ...
+    sheet.add_border "J#{user_start_row + package_item_count}:K#{user_start_row + package_item_count}" # Вес брутто
+    sheet.add_border "K#{user_start_row + package_item_count}:L#{user_start_row + package_item_count}" # Валюта (USD)...
+    sheet.add_border "L#{user_start_row + package_item_count}:M#{user_start_row + package_item_count}" # Валюта (СОМ)...
+    sheet.add_border "M#{user_start_row + package_item_count}:N#{user_start_row + package_item_count}" # Код, признак
+    sheet.add_border "N#{user_start_row + package_item_count}:O#{user_start_row + package_item_count}" # Дата, номер
+    sheet.add_border "O#{user_start_row + package_item_count}:P#{user_start_row + package_item_count}" # empty cell
+    sheet.add_border "P#{user_start_row + package_item_count}:Q#{user_start_row + package_item_count}" # empty cell
+
+    # Всего по индивидуальной накладной (общий вес брутто, стоимость в валюте государства-члена)
+    sheet.add_style "B#{user_start_row + package_item_count}:I#{user_start_row + package_item_count}", s[:v_top], s[:h_left], s[:wrap_text]
+    sheet.add_style "J#{user_start_row + package_item_count}:Q#{user_start_row + package_item_count}", s[:v_center], s[:h_center], s[:wrap_text] 
+    sheet.add_style "J#{user_start_row + package_item_count}:L#{user_start_row + package_item_count}", b: true
+
+    # Increase user_start_row, add 1 for row with Всего по индивидуальной...
+    user_start_row += package_item_count + 1
+  end
+
+  sheet.add_row [
+    nil, # A
+    "Всего по пассажирской таможенной декларации для экспресс-грузов\r\n(общий вес брутто, стоимость в валюте государства-члена)", # B
+    nil, # C
+    nil, # D
+    nil, # E
+    nil, # F
+    nil, # G
+    nil, # H
+    nil, # I
+    @shipment.packages.sum(&:weight), # J
+    @shipment.packages.sum(&:items_price), # K
+    (@shipment.packages.sum(&:items_price) * kgs_to_usd).round(2).to_s, # L
+    nil, # M
+    nil, # N
+    nil, # O
+    nil, # P
+    nil  # Q
+  ], height: 30
+
+  # Всего по пассажирской таможенной...
+  sheet.merge_cells "B#{user_start_row}:I#{user_start_row}"
+
+  # Всего по пассажирской таможенной...
+  sheet.add_border "A#{user_start_row}:A#{user_start_row}"
+  sheet.add_border "B#{user_start_row}:I#{user_start_row}"
+  sheet.add_border "I#{user_start_row}:J#{user_start_row}"
+  sheet.add_border "J#{user_start_row}:K#{user_start_row}"
+  sheet.add_border "K#{user_start_row}:L#{user_start_row}"
+  sheet.add_border "L#{user_start_row}:M#{user_start_row}"
+  sheet.add_border "M#{user_start_row}:N#{user_start_row}"
+  sheet.add_border "N#{user_start_row}:O#{user_start_row}"
+  sheet.add_border "O#{user_start_row}:P#{user_start_row}"
+  sheet.add_border "P#{user_start_row}:Q#{user_start_row}"
+
+  # Всего по пассажирской таможенной...
+  sheet.add_style "B#{user_start_row}:I#{user_start_row}", s[:v_top], s[:h_left], s[:wrap_text]
+  sheet.add_style "J#{user_start_row}:Q#{user_start_row}", s[:v_center], s[:h_center], s[:wrap_text] 
+  sheet.add_style "J#{user_start_row}:L#{user_start_row}", b: true
+
+
+  # ----------------- A,  B,  C,  D,  E, F,  G,  H, I,  J,  K,  L,  M,  N, O, P,  Q
+  sheet.column_widths 8, 25, 25, 25, 35, 8, 20, 15, 8, 13, 16, 16, 12, 16, 5, 8, 15
+end

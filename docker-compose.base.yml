@@ -1,0 +1,71 @@
+version: "3.8"
+
+x-app: &app
+  build:
+    context: .
+    target: base
+    args:
+      RUBY_VERSION: "2.6.6"
+      NODEJS_MAJOR: "12"
+  environment:
+    REDIS_URL: redis://redis:6379/
+  init: true
+  restart: unless-stopped
+  depends_on:
+    - db
+  networks:
+    - backend
+
+services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgres
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 1m
+    networks:
+      - backend
+
+  redis:
+    image: redis:6
+    restart: unless-stopped
+    volumes:
+      - redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli PING || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 1m
+    networks:
+      - backend
+
+  rails:
+    <<: *app
+    entrypoint: ["./entrypoint.sh"]
+    command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
+  webpacker:
+    <<: *app
+
+  worker:
+    <<: *app
+    command: ["bundle", "exec", "sidekiq"]
+
+volumes:
+  db:
+  redis:
+
+networks:
+  backend:

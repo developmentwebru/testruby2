@@ -1,0 +1,53 @@
+default: &default
+  domain: "els.kg"
+  mail_from: "Express Line Services <no-reply@els.kg>"
+  smtp_port: 587
+  smtp_server: "smtp.sendgrid.net"
+  aws_s3_bucket: "els-kg-uploads"
+  aws_s3_bucket_development: "els-app-localhost"
+  aws_s3_region: "eu-north-1"
+  site_name: "Express Line Services"
+  site_name_short: "ELS"
+  site_country_code: "KG"
+  shipping_price_usd: 11
+  us_address_line: "467 Carson Dr"
+  us_address_city: "Bear"
+  us_address_state: "Delaware (DE)"
+  us_address_zipcode: "19701"
+  us_address_phone: "571-294-3347"
+  customs_forms_fill:
+    :from_company: "M & A Express LLC"
+    :from_name: "Marat Yrysbekov"
+    :from_address: "467 Carson Dr"
+    :from_city: "Bear"
+    :from_state: "Delaware"
+    :from_zipcode: "19701"
+    :from_phone: "+1 (571) 294-3347"
+    :from_country: "United States"
+    :to_company: "Express Line Services"
+    :to_name: "Bakyt Myrzabekov"
+    :to_address: "Toktogul str. 87a, kab. 14\nBishkek"
+    :to_phone: "+996 (550) 605-712\n+996 (501) 008-820"
+    :to_phone_cp71: "+996 (550) 703-114"
+    :to_country: "Kyrgyzstan"
+  office_address: "г. Бишкек, ул. Токтогула 87а (ТЦ 'Мото') 2 этаж, 14 кабинет"
+  contact1:
+    :phone: "+996 (550) 605-712"
+    :telegram: true
+    :whatsapp: true
+  contact2:
+    :phone: "+996 (501) 008-820"
+    :telegram: false
+    :whatsapp: false
+  instagram: "els.kg"
+  facebook: "els.kgz"
+
+development:
+  <<: *default
+  domain: "localhost"
+
+test:
+  <<: *default
+
+production:
+  <<: *default

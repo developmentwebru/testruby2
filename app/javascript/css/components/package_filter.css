@@ -1,0 +1,25 @@
+.filter {
+  @apply
+    inline-flex items-center
+    text-els-black
+    rounded-full
+    px-2 py-2;
+  transition: background-color .1s ease-in-out;
+}
+.filter:hover:not(.filter-active)  {
+  @apply no-underline;
+  background-color: rgba(242, 242, 242, .7);
+}
+
+.filter-active {
+  @apply bg-indigo text-white;
+}
+.filter-active:hover { @apply no-underline; }
+
+.filter-icon-wrapper {
+  @apply shadow rounded-full text-white p-1 h-6 w-6 mr-1 flex items-center justify-center;
+}
+
+.filter-icon {
+  @apply fill-current h-6 w-6;
+}

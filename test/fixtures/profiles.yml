@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+kim:
+  first_name: Kim
+  last_name: Kardashian
+  phone: +996 700 148148
+  address: Gogol str. 48
+  city: Bishkek
+  user: kim

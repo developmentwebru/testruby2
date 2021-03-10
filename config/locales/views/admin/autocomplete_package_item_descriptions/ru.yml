@@ -1,0 +1,6 @@
+ru:
+  admin:
+    autocomplete_package_item_descriptions:
+      index:
+        title: "Описание посылок для автозаполнения"
+        add: "Добавить"

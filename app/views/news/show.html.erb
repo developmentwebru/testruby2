@@ -1,0 +1,6 @@
+<%= content_for :title do %>
+  <%= @news.title %>
+<% end %>
+
+<h1 class="mb-3 text-center"><%= @news.title %></h1>
+<%= @news.content.html_safe %>

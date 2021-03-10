@@ -1,0 +1,490 @@
+<!--<img src="<%#= asset_pack_path 'media/images/bg_cn23.png' %>" style="width: 210mm; height: 148mm; position: absolute; top: 0; left: 0; z-index:-1">-->
+
+<div class="grid_cn23">
+  <div class="left_cn23"></div>
+  <div class="header_cn23 rel" style="height: 5.9mm">
+    <div class="abs f-6pt" style="bottom: 0.5mm; left: 12.2mm">(Назначенный оператор)</div>
+    <div class="abs" style="left: 103.5mm; top: 0.4mm; font-size: 12pt; text-transform: uppercase; font-weight: bold">
+      Таможенная декларация
+    </div>
+    <div class="abs" style="left: 176mm; top: 0.4mm; font-size: 12pt; text-transform: uppercase; font-weight: bold">
+      Cn 23
+    </div>
+  </div>
+
+  <div class="from_to_cn23" style="position: relative">
+    <div class="w-100 bt">
+      <div class="f-10pt" style="margin-top: 0.3mm">Из</div>
+      <div class="f-8pt">From</div>
+    </div>
+    <div class="bt" style="position: absolute; top: 26.9mm; width: 8.4mm">
+      <div class="f-10pt" style="margin-top: 0.3mm">В</div>
+      <div class="f-8pt">To</div>
+    </div>
+    <div class="bt" style="position: absolute; top: 53.7mm; width: 8.4mm">&nbsp;</div>
+  </div>
+
+  <div class="sender_recipient_cn23" style="height: 54mm; position: relative">
+    <div class="b bl-off bb-off" style="position: absolute; left: 71.8mm; width: 22.6mm; height: 11mm">
+      <div class="pl-10" style="padding-top: 0.9mm; font-size: 5.5pt">Таможенная ссылка отправителя (если имеется)</div>
+      <div class="pl-10" style="font-size: 5pt">Sender’s Customs reference (if any)</div>
+    </div>
+    <!-- Sender -->
+    <div class="w-100 b bb-off rel" style="height: 5.7mm; width: 71.8mm">
+      <div class="pl-10 pt-5">
+        <div class="f-7pt">Фамилия</div>
+        <div class="f-6pt">Name</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.8mm">
+        <%= SiteConfig.customs_forms_fill[:from_name] %>
+      </div>
+    </div>
+    <div class="w-100 b bb-off rel" style="height: 5.3mm; width: 71.8mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Компания/Фирма</div>
+        <div class="f-6pt">Business</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.5mm">
+        <%= SiteConfig.customs_forms_fill[:from_company] %>
+      </div>
+    </div>
+    <div class="w-100 b bb-off rel" style="height: 5.3mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Улица</div>
+        <div class="f-6pt">Street</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.5mm">
+        <%= SiteConfig.customs_forms_fill[:from_address] %>
+      </div>
+    </div>
+    <div class="w-100 b bb-off rel" style="height: 5.3mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Почтовый индекс</div>
+        <div class="f-6pt">Postcode</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.5mm">
+        <%= SiteConfig.customs_forms_fill[:from_zipcode] %>
+      </div>
+      <div class="pl-10 pt-3" style="position: absolute; top: 0; left: 37mm">
+        <div class="f-7pt">Город</div>
+        <div class="f-6pt">City</div>
+      </div>
+      <div class="abs f-10pt" style="left: 47mm; top: 1.5mm">
+        <%= SiteConfig.customs_forms_fill[:from_city] %>
+      </div>
+    </div>
+    <div class="w-100 b bb-off rel" style="height: 5.3mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Страна</div>
+        <div class="f-6pt">Country</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.5mm">
+        <%= SiteConfig.customs_forms_fill[:from_country] %>
+      </div>
+    </div>
+    <!-- Recipient -->
+    <div class="w-100 b bb-off rel" style="height: 5.8mm">
+      <div class="pl-10 pt-5">
+        <div class="f-7pt">Фамилия</div>
+        <div class="f-6pt">Name</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.6mm">
+        <% if @package.user %>
+          <%= @package.user.profile&.first_name %> <%= @package.user.profile&.last_name %>
+        <% else %>
+          <%= @package.guest.first_name %> <%= @package.guest.last_name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="w-100 b bb-off" style="height: 5.3mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Компания/Фирма</div>
+        <div class="f-6pt">Business</div>
+      </div>
+    </div>
+    <div class="w-100 b bb-off rel" style="height: 5.3mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Улица</div>
+        <div class="f-6pt">Street</div>
+      </div>
+      <div class="abs f-10pt" style="left: 15mm; top: 1.5mm">
+        <% if @package.user %>
+          <%= @package.user.profile&.address %>
+        <% end %>
+      </div>
+    </div>
+    <div class="w-100 b bb-off rel" style="height: 5.3mm; position: relative">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Почтовый индекс</div>
+        <div class="f-6pt">Postcode</div>
+      </div>
+      <div class="abs f-10pt" style="left: 22.5mm; top: 1.5mm">
+      </div>
+      <div class="pl-10 pt-3" style="position: absolute; top: 0; left: 37mm">
+        <div class="f-7pt">Город</div>
+        <div class="f-6pt">City</div>
+      </div>
+      <div class="abs f-10pt" style="left: 47mm; top: 1.5mm">
+        <% if @package.user %>
+          <%= @package.user.profile&.city %>
+        <% end %>
+      </div>
+    </div>
+    <div class="w-100 b rel" style="height: 5.4mm">
+      <div class="pl-10 pt-3">
+        <div class="f-7pt">Страна</div>
+        <div class="f-6pt">Country</div>
+      </div>
+      <div class="abs f-10pt" style="left: 25mm; top: 1.5mm">
+        <%= SiteConfig.customs_forms_fill[:to_country] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="barcode_cn23" style="height: 38mm; position: relative">
+    <div class="f-6pt pl-10" style="width: 40mm;">№ отправления (штриховой код если имеется)</div>
+    <div class="bl pl-10 f-6pt" style="position: absolute; top: 0; left: 41mm; width: 27mm; font-weight: bold">
+      Может быть вскрыто в служебном порядке
+    </div>
+    <div class="f-6pt" style="position: absolute; top: 0; left: 73.3mm; width: 15mm; font-weight: bold; line-height: 1.3">
+      Внимание! Инструкции на обратной стороне
+    </div>
+
+    <div class="abs" style="left: 1mm; top: 7mm; font-size: 10pt">
+      <strong>CUSTOMS DECLARATION</strong>
+    </div>
+    <div class="abs f-6pt" style="left: 1mm; top: 11mm">No. of item (barcode, if any)</div>
+    <div class="bl pl-10 abs f-6pt" style="left: 41mm; top: 11mm; font-weight: bold">May be opened officially</div>
+
+    <div class="abs" style="top: 17mm; left: 1.5mm;">
+      <div style="font-size: 10pt"><%= @package.tracking %></div>
+      <div class="pt-10">
+        <%= Barby::Code128.new(@package.tracking).to_svg(margin: 0, height: 35).html_safe %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="importer_details_cn23" style="height: 16mm">
+    <div class="w-100">
+      <div class="bt bb br" style="height: 8.2mm">
+        <div class="pl-10 pt-3" style="max-width: 90%">
+          <div class="f-6pt">Реквизиты импортера (если имеются) (ИНН/№ НДС/индекс импортера) (факультативно)</div>
+          <div class="f-5pt">Importer’s reference (if any) (tax code/VAT No./importer code) (optional)</div>
+        </div>
+      </div>
+      <div class="bb br rel" style="height: 7.8mm">
+        <div class="pl-10 pt-3" style="max-width: 90%">
+          <div class="f-6pt">№ телефона/факса/e-mail импортера (если известен)</div>
+          <div class="f-5pt">Importer’s telephone/fax/e-mail (if known)</div>
+        </div>
+        <div class="abs f-8pt" style="left: 40mm; top: 4mm">
+          <%= SiteConfig.customs_forms_fill[:from_phone] %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="package_contents_header_cn23 bl br" style="height: 9.2mm; line-height: 1.2">
+    <div class="package-item-grid_cn23">
+      <div class="br pl-10 pt-15" style="height: 9.2mm">
+        <div class="f-7pt">Подробное описание вложения (1)</div>
+        <div class="f-6pt">Detailed description of contents</div>
+      </div>
+      <div class="br pl-10 pt-15" style="height: 9.2mm">
+        <div class="f-7pt">Количество (2)</div>
+        <div class="f-6pt">Quantity</div>
+      </div>
+      <div class="br pl-10 pt-15" style="height: 9.2mm">
+        <div class="f-6pt">Вес нетто (в кг) (3)</div>
+        <div class="f-6pt">Net Weight</div>
+      </div>
+      <div class="br pl-10 pt-15" style="height: 9.2mm">
+        <div class="f-7pt">Стоимость (5)</div>
+        <div class="f-6pt">Value</div>
+      </div>
+      <div class="bt f-6pt" style="height: 9.2mm">
+        <div class="pl-10 bl pt-3" style="line-height: 1; width: 63.2mm; height: 50%">
+          <div class="f-6pt">
+            <i>Только для коммерческих отправлений</i>
+          </div>
+          <div class="f-5pt">
+            <i>For commercial items only</i>
+          </div>
+        </div>
+        <div class="pl-10 bl bt br pt-3" style="line-height: 1; width: 31.6mm; height: 50%">
+          <div class="f-6pt">Код ТНВЭД (7)</div>
+          <div class="f-5pt">HS tariff number</div>
+        </div>
+      </div>
+      <div class="br bt" style="height: 9.2mm; border-right: 0.4mm solid #444">
+        <div class="pl-10" style="line-height: 1; height: 50%; padding-top: 1.3mm"></div>
+        <div class="pl-10 bt pt-3" style="font-size: 4.5pt; line-height: 1.2; width: 31.6mm; height: 50%">
+          Страна происхождения товаров (8)
+          <div>Country of origin of goods</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="package_contents_cn23 bl br" style="min-height: 21.5mm">
+    <div class="w-100 package-item-grid_cn23">
+      <!-- 1 -->
+      <div class="bt br pl-10" style="min-height: 5.3mm">
+        <% if @package.package_items[0].description.length > 30 %>
+          <div class="f-7pt py-5 wb" style="height: auto; line-height: 1.2">
+            <%= @package.package_items[0].description %>
+          </div>
+        <% else %>
+          <div class="pt-10 f-10pt">
+            <%= @package.package_items[0].description %>
+          </div>
+        <% end %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.3mm">
+        <%= @package.package_items[0].qty %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.3mm"></div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.3mm">
+        <%= number_to_currency(@package.package_items[0].price, locale: :en) %>
+      </div>
+      <div class="bt bl br" style="min-height: 5.3mm"></div>
+      <div class="bt br" style="min-height: 5.3mm; border-right: 0.4mm solid #444"></div>
+
+
+      <!-- 2 -->
+      <div class="bt br pl-10" style="min-height: 5.3mm">
+        <% if @package.package_items[1] && @package.package_items[1].description.length > 30 %>
+          <div class="f-7pt py-5 wb" style="height: auto; line-height: 1.2">
+            <%= @package.package_items[1].description %>
+          </div>
+        <% else %>
+          <div class="pt-10 f-10pt">
+            <%= @package.package_items[1]&.description %>
+          </div>
+        <% end %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.3mm">
+        <%= @package.package_items[1]&.qty %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.3mm"></div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.3mm">
+        <%= number_to_currency(@package.package_items[1]&.price, locale: :en) %>
+      </div>
+      <div class="bt bl br" style="min-height: 5.3mm"></div>
+      <div class="bt br" style="min-height: 5.3mm; border-right: 0.4mm solid #444"></div>
+
+
+      <!-- 3 -->
+      <div class="bt br pl-10" style="min-height: 5.5mm">
+        <% if @package.package_items[2] && @package.package_items[2].description.length > 30 %>
+          <div class="f-7pt py-5 wb" style="height: auto; line-height: 1.2">
+            <%= @package.package_items[2].description %>
+          </div>
+        <% else %>
+          <div class="pt-10 f-10pt">
+            <%= @package.package_items[2]&.description %>
+          </div>
+        <% end %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.5mm">
+        <%= @package.package_items[2]&.qty %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.5mm"></div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.5mm">
+        <%= number_to_currency(@package.package_items[2]&.price, locale: :en) %>
+      </div>
+      <div class="bt bl br" style="min-height: 5.5mm"></div>
+      <div class="bt br" style="min-height: 5.5mm; border-right: 0.4mm solid #444"></div>
+
+
+      <!-- 4 -->
+      <div class="bt br pl-10" style="min-height: 5.4mm">
+        <% if @package.package_items[3] && @package.package_items[3].description.length > 30 %>
+          <div class="f-7pt py-5 wb" style="height: auto; line-height: 1.2">
+            <%= @package.package_items[3].description %>
+          </div>
+        <% else %>
+          <div class="pt-10 f-10pt">
+            <%= @package.package_items[3]&.description %>
+          </div>
+        <% end %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.4mm">
+        <%= @package.package_items[3]&.qty %>
+      </div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.4mm"></div>
+      <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.4mm">
+        <%= number_to_currency(@package.package_items[3]&.price, locale: :en) %>
+      </div>
+      <div class="bt bl br" style="min-height: 5.4mm"></div>
+      <div class="bt br" style="min-height: 5.4mm; border-right: 0.4mm solid #444"></div>
+
+      <% if @package.package_items.count > 4 %>
+        <% @package.package_items.each_with_index do |item, i| %>
+          <% next if i < 4 %>
+
+          <div class="bt br pl-10" style="min-height: 5.4mm">
+            <% if item.description.length > 30 %>
+              <div class="f-7pt py-5 wb" style="height: auto; line-height: 1.2">
+                <%= item.description %>
+              </div>
+            <% else %>
+              <div class="pt-10 f-10pt">
+                <%= item.description %>
+              </div>
+            <% end %>
+          </div>
+          <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.4mm">
+            <%= item.qty %>
+          </div>
+          <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.4mm"></div>
+          <div class="bt br pl-10 pt-10 f-10pt" style="min-height: 5.4mm">
+            <%= number_to_currency(item.price, locale: :en) %>
+          </div>
+          <div class="bt bl br" style="min-height: 5.4mm"></div>
+          <div class="bt br" style="min-height: 5.4mm; border-right: 0.4mm solid #444"></div>
+
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="package_contents_footer_cn23 bl br" style="height: 7.5mm">
+    <div class="w-100 package-item-grid_cn23">
+      <div class="bt br" style="height: 7.5mm"></div>
+      <div class="bt br" style="height: 7.5mm"></div>
+      <div class="bt br" style="height: 7.5mm; padding-left: 0.7mm; padding-top: 0.1mm">
+        <div class="f-5pt">Общий вес брутто (4)</div>
+        <div class="f-5pt">Total gross weight</div>
+        <div class="f-10pt" style="padding-top: 0.1mm">
+          <%= @package.weight %> <%= t("weight_kg") %>
+        </div>
+      </div>
+      <div class="bt br" style="height: 7.5mm; font-size: 5pt; padding-left: 0.7mm; padding-top: 0.1mm">
+        <div class="f-5pt">Общая стоимость (6)</div>
+        <div class="f-5pt">Total value</div>
+        <div class="f-10pt" style="padding-top: 0.1mm">
+          <!-- number_to_currency(@package.package_items_price) -->
+        </div>
+      </div>
+      <div class="bt" style="height: 7.5mm; border-top: 0.4mm solid #444; padding-left: 0.7mm; padding-top: 0.1mm">
+        <div class="f-5pt">Почтовые сборы/Расходы (9)</div>
+        <div class="f-5pt">Postal charges/Fees</div>
+      </div>
+      <div class="bt" style="height: 7.5mm; border-top: 0.4mm solid #444"></div>
+    </div>
+  </div>
+
+  <div class="package_category_cn23 b" style="height: 47mm; width: 121.6mm;">
+    <!-- Category -->
+    <div style="height: 12.5mm; position: relative">
+      <div class="pl-10" style="padding-top: 0.1mm">
+        <div class="f-5pt" style="font-size: 5.5pt">Категория отправления (10)</div>
+        <div class="f-5pt" style="font-size: 4.5pt">Category of item</div>
+      </div>
+      <!-- Gift -->
+      <div class="b bb-off bl-off" style="position: absolute; top: 4mm; width: 4.3mm; height: 4.3mm"></div>
+      <div style="position: absolute; top: 5.1mm; left: 5.1mm">
+        <div class="f-7pt">
+          Подарок&thinsp;
+          <span class="f-6pt">Gift</span>
+        </div>
+      </div>
+      <!-- Document -->
+      <div class="b bl-off bb-off" style="position: absolute; top: 8.3mm; width: 4.3mm; height: 4.3mm"></div>
+      <div style="position: absolute; top: 9.5mm; left: 5.1mm">
+        <div class="f-7pt">
+          Документ&thinsp;
+          <span class="f-6pt">Documents</span>
+        </div>
+      </div>
+      <!-- Commercial sample -->
+      <div class="b bt-off bb-off" style="position: absolute; top: 0; left: 37.9mm; width: 4.4mm; height: 4.2mm"></div>
+      <div class="f-6pt" style="position: absolute; top: 0.1mm; left: 43.4mm">
+        Коммерческий образец
+        <div class="f-5pt">Commercial sample</div>
+      </div>
+      <!-- Returned goods -->
+      <div class="b bb-off" style="position: absolute; top: 4.2mm; left: 37.9mm; width: 4.4mm; height: 4.2mm"></div>
+      <div class="f-6pt" style="position: absolute; top: 4.2mm; left: 43.4mm">
+        Возврат товара
+        <div class="f-5pt">Returned goods</div>
+      </div>
+      <!-- Other -->
+      <div class="b bb-off f-10pt" style="position: absolute; top: 8.3mm; left: 37.9mm; width: 4.4mm; height: 4.3mm">
+        <div style="padding-left: 0.4mm">✔</div>
+      </div>
+      <div class="f-6pt" style="position: absolute; top: 8.3mm; left: 43.4mm">
+        Прочее
+        <div class="f-5pt">Other</div>
+      </div>
+      <!-- Explanation -->
+      <div class="f-7pt" style="position: absolute; left: 72.5mm; top: 0.1mm">
+        Пояснение:
+        <div class="f-5pt">Explanation:</div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="bt" style="height: 21.5mm;">
+      <div class="pl-10 wb" style="padding-top: 0.8mm; width: 90%; line-height: 1.3">
+        <div class="f-7pt">
+          Примечания (11): (напр., товар, подлежащий карантину/санитарному, фитосанитарному контролю или подпадающий под другие ограничения)
+        </div>
+        <div class="f-6pt">
+          Comments (11): (e.g.: goods subject to quarantine, sanitary/phytosanitary inspection or other restrictions)
+        </div>
+      </div>
+    </div>
+
+    <!-- License -->
+    <div class="bt" style="height: 12.6mm; position: relative">
+      <div class="br" style="width: 38mm; height: 12.6mm; position: relative">
+        <div class="bb br" style="position: absolute; top: 0; width: 4.2mm; height: 4.1mm"></div>
+        <div class="f-7pt" style="position: absolute; top: 0.9mm; left: 5mm">
+          Лицензия (12)&thinsp;
+          <span class="f-6pt">Licence</span>
+        </div>
+        <div class="f-6pt" style="position: absolute; top: 5mm; left: 1mm">№ лицензии(-ий)</div>
+      </div>
+      <div class="br" style="width: 38mm; height: 12.6mm; position: absolute; left: 38mm; top: 0">
+        <div class="bb br" style="position: absolute; top: 0; width: 4.2mm; height: 4.1mm"></div>
+        <div class="f-7pt" style="position: absolute; top: 0.9mm; left: 5mm">
+          Сертификат (13)&thinsp;
+          <span class="f-5pt">Certificate</span>
+        </div>
+        <div class="f-6pt" style="position: absolute; top: 5mm; left: 1mm">№ сертификата(-ов)</div>
+      </div>
+      <div style="position: absolute; width: 45.2mm; height: 12.6mm; left: 76mm; top: 0">
+        <div class="bb br" style="position: absolute; top: 0; width: 4.2mm; height: 4.1mm"></div>
+        <div class="f-7pt" style="position: absolute; top: 0.9mm; left: 5mm">
+          Счет (14)&thinsp;
+          <span class="f-6pt">Invoice</span>
+        </div>
+        <div class="f-6pt" style="position: absolute; top: 5mm; left: 1mm">№ счета</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sender_signature_cn23 bt br bb" style="width: 63.2mm; margin-left: 27.2mm">
+    <div class="pl-10" style="padding-top: 0.8mm; height: 20.9mm">
+      <div class="f-7pt">Учреждение подачи/Дата подачи</div>
+      <div class="f-6pt">Office of origin/Date of posting</div>
+    </div>
+    <div class="bt pl-10" style="padding-top: 0.8mm; font-size: 5pt; height: 13.1mm">
+      Я подтверждаю, что указанные в настоящей таможенной декларации сведения являются достоверными,
+      и что в этом отправлении не содержится никаких опасных или запрещенных законодательством или почтовой
+      или таможенной регламентацией предметов
+    </div>
+    <div class="bt" style="width: 4mm;"></div>
+    <div class="pl-10 pt-10 f-7pt rel">
+      Дата и подпись отправителя (15)
+      <div class="abs f-10pt" style="top: 5mm;">
+        <%= Date.current %>
+      </div>
+      <img class="abs" style="top: -4.8mm; left: 43mm; height: 16mm" src="<%= asset_pack_path 'media/images/signature_marat.jpg' %>">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+ru:
+  admin:
+    shipment_next_dates:
+      edit:
+        title: "Изменить дату следующего отправления"
+      update:
+        notice: "Дата следующего отправления изменена"

@@ -1,0 +1,77 @@
+<div class="card position-relative mb-2">
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= link_to package.tracking, edit_admin_package_path(package), class: "text-dark" %>
+
+      <% if package.weight %>
+        <div class="d-md-inline-block my-2 my-md-0 d-md-inline-block ml-md-1">
+          <span class="align-top badge badge-font-500 badge-pill badge-secondary">
+            <%= package.weight %>
+            <%= t("weight_kg") %>
+          </span>
+        </div>
+      <% end %>
+
+      <div class="d-md-inline-block mt-2 mb-3 my-md-0 ml-md-1">
+        <% if package.shipment %>
+          <span class="align-top badge badge-font-500 badge-pill badge-light">
+            <%= t("activerecord.attributes.shipment.status.#{package.shipment.status}") %>
+            <span class="ph1">/</span>
+            <%= package.shipment.created_at.strftime("%d-%m-%Y") %>
+          </span>
+        <% else %>
+          <span class="align-top badge badge-font-500 badge-pill badge-light">
+            <%= t("activerecord.attributes.package.status_warehouse.#{package.status_warehouse}") %>
+          </span>
+        <% end %>
+      </div>
+
+      <% if package.package_photos.any? %>
+        <i class="ml-md-1 fas fa-images text-muted"></i>
+      <% end %>
+    </h5>
+
+    <h6 class="card-subtitle mb-2">
+      <% if package.user %>
+        <i class="fas fa-user mr-1"></i>
+        <%= package.user.profile&.first_name %>
+        <%= package.user.profile&.last_name %>
+      <% else %>
+        <%= package.guest.first_name %>
+        <%= package.guest.last_name %>
+      <% end %>
+    </h6>
+
+    <ul class="list-unstyled mb-0">
+      <% package.package_items.each do |item| %>
+        <li class="text-muted" style="font-size: 14px">
+          <span class="d-inline-block text-truncate" style="max-width: 46%;"><%= item.description %></span>
+          <span class="text-muted mx-1">⨯</span>
+          <span class="">$<%= item.price %></span>
+          <span class="text-muted mx-1">⨯</span>
+          <span><%= item.qty %></span>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="position-absolute mr-1 mt-md-1 mr-md-2" style="top: 0; right: 0">
+      <%= link_to cn23_admin_package_path(package), 'data-turbolinks': "false", target: "_blank", class: "btn btn-sm btn-light mr-2 d-none d-md-inline-block" do %>
+        CN 23
+      <% end %>
+      <%= link_to admin_package_path(package), class: "text-secondary", method: :delete, data: { confirm: t("confirmation") } do %>
+        <%= octicon "trash", :height => 24 %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted" style="font-size: 12px">
+    <span class="d-block d-md-inline-block mr-md-3"><%= t("datetime.created_at") %>: <%= l(package.created_at, format: :shorty) %></span>
+    <span class="d-block d-md-inline-block mr-md-3"><%= t("datetime.updated_at") %>: <%= l(package.updated_at, format: :shorty) %></span>
+    <% if package.processed_at %>
+      <span class="d-block d-md-inline-block mr-md-3"><%= t("datetime.processed_at") %>: <%= l(package.processed_at, format: :shorty) %></span>
+    <% end %>
+    <% if package.received_at %>
+      <span class="d-block d-md-inline-block"><%= t("datetime.received_at") %>: <%= l(package.received_at, format: :shorty) %></span>
+    <% end %>
+  </div>
+</div>

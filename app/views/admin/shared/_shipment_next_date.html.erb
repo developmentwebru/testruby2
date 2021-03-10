@@ -1,0 +1,10 @@
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-center p-2 border-top border-bottom">
+  <span class="mr-2"><%= t(".label") %></span>
+  <% if current_user.super_admin? %>
+    <%= form_tag admin_shipment_next_date_path, method: :put do %>
+      <%= date_field_tag :date, ShipmentNextDate.first.date, id: "shipment_next_date_date", class: "mt-1 mt-md-0 form-control form-control-sm", tabindex: "-1", style: "max-width: 110px", onchange: "this.form.submit()" %>
+    <% end %>
+  <% else %>
+    <strong><%= ShipmentNextDate.first.date.strftime("%d/%m/%Y") %></strong>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+<%= content_for :title do %>
+  <%= t(".forgot_your_password") %>
+<% end %>
+
+<h4 class="text-center mb-3"><%= t(".forgot_your_password") %></h4>
+<div class="w-100 mx-auto" style="max-width: 350px;">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="form-group">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: t("activerecord.attributes.user.email"), class: "form-control" %>
+    </div>
+
+    <%= f.submit t(".send_me_reset_password_instructions"), class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>
+
+<div class="text-center mt-4">
+  <small><%= link_to t("devise.back_to_sign_in"), new_user_session_path %></small>
+</div>

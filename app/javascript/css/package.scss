@@ -1,0 +1,13 @@
+// Hide trash icon of first item in package-items
+#package_items .nested-fields:nth-child(1) a.remove_fields {
+  display: none !important;
+}
+
+// Uploaded images
+.image {
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  object-fit: cover;
+  width: 100%;
+  height: 120px;
+}

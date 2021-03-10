@@ -1,0 +1,377 @@
+<% packages = owner.packages.where(shipment: shipment) %>
+<style>
+  @page { margin: 0; size: A4; }
+</style>
+
+<!--<img src="<%#= asset_pack_path 'images/bg_cp71.png' %>" style="width: 210mm; height: 297mm; position: absolute; top: 0; left: 0; z-index:-1">-->
+
+<div class="grid_cp71">
+  <div class="left_cp71"></div>
+  <div class="top_cp71" style="height: 9.4mm"></div>
+
+  <div class="header_cp71 rel" style="height: 12.5mm">
+    <div class="abs f-8pt" style="left: 9mm; top: 5.1mm">(Administration des postes)</div>
+    <div class="abs f-8pt" style="left: 9mm; top: 8.4mm">(Почтовая администрация)</div>
+
+    <div class="abs f-9pt" style="left: 50mm; top: 5.1mm">
+      720000, КР, г.Бишкек,
+    </div>
+    <div class="abs f-9pt" style="left: 50mm; top: 8.5mm">
+      ул. Токтогула 56
+    </div>
+
+    <div class="abs bold" style="right: 0; top: 0; font-size: 14pt">CP-71</div>
+    <div class="abs f-8pt" style="right: 0; top: 5mm">(прежний CP 2)</div>
+  </div>
+
+  <div class="from_to_cp71 rel">
+    <div class="bt">
+      <div class="abs f-10pt bold" style="left: 2.2mm; top: 1.4mm">De</div>
+      <div class="abs f-10pt bold" style="left: 2.2mm; top: 5.2mm">Из</div>
+    </div>
+    <div class="bt abs" style="top: 36mm; width: 100%"></div>
+
+    <div class="abs f-10pt bold" style="left: 2.2mm; top: 74.2mm">A</div>
+    <div class="abs f-10pt bold" style="left: 2.2mm; top: 78mm">В</div>
+
+    <div class="bb abs" style="bottom: 0; width: 100%"></div>
+  </div>
+
+  <div class="sender_recipient_cp71" style="height: 111.8mm">
+    <div class="b rel" style="height: 36.2mm">
+      <div class="pl-10 pt-10 f-8pt">Nom et adresse de l’expediteur</div>
+      <div class="pl-10 pt-5 f-8pt">Фамилия и адрес отправителя</div>
+
+      <div class="abs" style="top: 10mm; left: 2.3mm">
+        <div class="f-10pt"><%= SiteConfig.customs_forms_fill[:from_company] %></div>
+        <div class="pt-5 f-10pt"></div>
+        <div class="pt-5 f-10pt"><%= SiteConfig.customs_forms_fill[:from_address] %></div>
+        <div class="pt-5 f-10pt">
+          <%= SiteConfig.customs_forms_fill[:from_city] %>,
+          <%= SiteConfig.customs_forms_fill[:from_state] %>
+        </div>
+        <div class="pt-5 f-10pt">
+          <%= SiteConfig.customs_forms_fill[:from_country] %>
+        </div>
+        <div class="pt-5 f-10pt"><%= SiteConfig.customs_forms_fill[:from_phone] %></div>
+        <div class="pt-5 f-10pt"><%= SiteConfig.customs_forms_fill[:from_name] %></div>
+      </div>
+    </div>
+
+    <div class="b bt-off rel" style="height: 34.8mm">
+      <div class="br" style="height: 34.8mm; width: 44.1mm"></div>
+      <div class="abs" style="left: 1.1mm; top: 2.1mm">
+        <div class="f-8pt">Timbre de la douane</div>
+      </div>
+      <div class="abs" style="left: 1.1mm; top: 5.3mm">
+        <div class="f-8pt">Штемпель таможни</div>
+      </div>
+      <div class="abs" style="left: 50%; top: 2.1mm">
+        <div class="f-8pt">Bareau d’echange</div>
+      </div>
+      <div class="abs" style="left: 50%; top: 5.3mm">
+        <div class="f-8pt">Учреждение обмена</div>
+      </div>
+    </div>
+
+    <div class="b bt-off bb-off rel" style="height: 40.8mm">
+      <div class="pl-10 pt-15 f-8pt">Nom et adresse du destinataire, y compria le pays de destination</div>
+      <div class="pl-10 pt-5 f-8pt">Фамилия и адрес получателя, включая страну назначения</div>
+
+      <div class="abs" style="top: 10mm; left: 2.3mm; width: 75mm">
+        <div class="f-8pt">
+          <%= SiteConfig.customs_forms_fill[:to_company] %>
+        </div>
+        <div class="pt-5 f-8pt" style="max-width: 130px">
+          <%= SiteConfig.customs_forms_fill[:to_address] %>
+        </div>
+        <div class="pt-5 f-8pt">
+          <%= SiteConfig.customs_forms_fill[:to_country] %>
+        </div>
+        <div class="pt-5 f-8pt">
+          Tel: <%= SiteConfig.customs_forms_fill[:to_phone_cp71] %>
+        </div>
+        <div class="pt-5 f-8pt">
+          <%= SiteConfig.customs_forms_fill[:to_name] %>
+        </div>
+      </div>
+
+      <div class="abs" style="top: 10mm; left: 40.3mm; width: 50mm">
+        <div class="f-10pt">
+          <% if owner.try(:profile) %>
+            <%= owner.profile.first_name %>
+            <%= owner.profile.last_name %>
+          <% else %>
+            <%= owner.first_name %>
+            <%= owner.last_name %>
+          <% end %>
+        </div>
+        <% if owner.try(:profile) %>
+          <div class="pt-5 f-10pt">
+            <%= owner.profile.address %>
+          </div>
+          <div class="pt-5 f-10pt mt10">
+            <%= owner.profile.city %>
+          </div>
+          <div class="pt-5 f-10pt">
+            <%= owner.profile.phone %>
+          </div>
+        <% end %>
+        <div class="pt-5 f-10pt">
+          <%= SiteConfig.customs_forms_fill[:to_country] %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="price_cp71">
+    <div class="b bb-off bl-off rel" style="height: 16.4mm">
+      <div class="pl-10 pt-10 f-8pt pl-23">Valeur declare-en letters</div>
+      <div class="pt-5 f-8pt pl-23">Объявленная ценность - прописью</div>
+
+      <div class="abs pl-23 pt-10 f-9pt" style="width: 61mm">
+        <%= RuPropisju.dollarov(packages.items_price, :ru, always_show_fraction: true) %>
+      </div>
+
+      <div class="abs bl" style="left: 61.7mm; top: 0; height: 4mm"></div>
+      <div class="abs" style="right: 10mm; top: 1mm">
+        <div class="f-8pt">en chiffres</div>
+        <div class="pt-5 f-8pt">цифрами</div>
+      </div>
+
+      <div class="abs pt-10 f-10pt", style="right: 12mm">
+        <%= number_to_currency(packages.items_price, locale: :en) %>
+      </div>
+    </div>
+
+    <div class="b bb-off bl-off rel" style="height: 35.2mm">
+      <div class="pl-23 pt-10 f-8pt">Montant du remboursement – en letters</div>
+      <div class="pl-23 pt-5 f-8pt">Сумма возмещения – прописью</div>
+
+      <div class="abs pl-23 pt-10 f-9pt" style="width: 61mm">
+        <%= RuPropisju.dollarov(packages.items_price, :ru, always_show_fraction: true) %>
+      </div>
+
+      <div class="abs bl" style="left: 61.7mm; top: 0; height: 4mm"></div>
+      <div class="abs" style="right: 10mm; top: 1mm">
+        <div class="f-8pt">en chiffres</div>
+        <div class="pt-5 f-8pt">цифрами</div>
+      </div>
+
+      <div class="abs pt-10 f-10pt", style="right: 12mm">
+        <%= number_to_currency(packages.items_price, locale: :en) %>
+      </div>
+
+      <div class="abs pl-23" style="top: 16mm">
+        <div class="f-8pt">Compte courant postal n, centre de cheques</div>
+        <div class="pt-5 f-8pt">№ текущего почтового счёта, центр чеков</div>
+      </div>
+    </div>
+
+    <div class="b bb-off bl-off" style="height: 19.2mm">
+      <div class="pl-23 pt-10 f-8pt">(Apposer les etiquettes officielles, le cas echeant)</div>
+      <div class="pl-23 pt-5 f-8pt">(Приклеить официальные ярлыки, если необходимо)</div>
+    </div>
+
+    <div class="b bb-off bl-off rel" style="height: 41mm">
+      <div class="pl-23 pt-21 f-7pt">Nombre de</div>
+      <div class="pl-23 pt-10 f-7pt">Количество</div>
+      <div class="abs f-12pt" style="top: 10mm; left: 4mm">
+        <%= packages.count %>
+      </div>
+
+      <div class="abs bl" style="top: 0; left: 18.2mm; height: 4mm"></div>
+      <div class="abs" style="top: 2.1mm; left: 19.5mm">
+        <div class="f-7pt">colis</div>
+        <div class="pt-10 f-7pt">посылок</div>
+      </div>
+
+      <div class="abs bl" style="top: 0; left: 31.6mm; height: 4mm"></div>
+      <div class="abs" style="top: 2.1mm; left: 33mm">
+        <div class="f-7pt">certificate et factures</div>
+        <div class="pt-10 f-7pt" style="width: 12mm">подтверждений и счетов</div>
+      </div>
+
+      <div class="abs bl" style="top: 0; left: 59.5mm; height: 41mm"></div>
+      <div class="abs bb" style="top: 17.6mm; left: 0; width: 59.5mm"></div>
+      <div class="abs pl-23" style="top: 19mm">
+        <div class="f-8pt">Valeur declare en DTS</div>
+        <div class="pt-5 f-8pt">Объявленная ценность в СПЗ</div>
+
+        <div class="pt-15 f-10pt" style="padding-left: 2mm">
+           <%= number_to_currency(packages.items_price, locale: :en) %>
+        </div>
+      </div>
+
+      <div class="abs bb" style="top: 32.6mm; left: 0; width: 59.5mm"></div>
+      <div class="abs pl-23" style="top: 34mm; left: 0">
+        <div class="f-7pt">Poids brut total</div>
+        <div class="pt-10 f-7pt">Общий вес брутто</div>
+      </div>
+      <div class="abs bl" style="top: 32.6mm; left: 27.4mm; height: 8.2mm"></div>
+      <div class="abs f-10pt" style="top: 35.2mm; left: 28.5mm;">
+        <%= packages.pluck(:weight).inject(0) { |sum, p| sum + p } %>
+        <%= t("weight_kg") %>
+      </div>
+
+      <div class="abs" style="top: 2.1mm; left: 60.8mm">
+        <div class="f-8pt">Bureau d origine /</div>
+        <div class="pt-5 f-8pt">Date de depot</div>
+        <div class="pt-5 f-8pt">Учреждение подачи /</div>
+        <div class="pt-5 f-8pt">Дата подачи</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkboxes_cp71" style="height: 144.1mm">
+    <div class="b bb-off" style="height: 8mm">
+      <div class="pl-10 pt-5 f-8pt">Droit de douane</div>
+      <div class="pl-10 pt-5 f-8pt">Таможенный сбор</div>
+    </div>
+    <div class="b bb-off" style="height: 8mm">
+      <div class="pl-10 pt-10 f-8pt">Categorie de colis</div>
+      <div class="pl-10 pt-5 f-8pt">Категория посылки</div>
+    </div>
+    <div class="b rel" style="height: 128.1mm">
+      <div class="pl-10 pt-21 f-8pt">Insturcions de I’expediteur en cas de non-livraison</div>
+      <div class="pl-10 pt-5 f-8pt">Инструкция отправителя в случае невыдачи</div>
+
+      <div class="abs b" style="top: 17.2mm; left: 3.4mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 17.4mm; left: 14.4mm">
+        <div class="f-7pt">Avis de non-livraison a I’expediteur</div>
+        <div class="pt-5 f-7pt">Уведомление о не выдаче</div>
+        <div class="pt-5 f-7pt">Отправителю</div>
+      </div>
+
+      <div class="abs b" style="top: 31mm; left: 3.4mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 32.8mm; left: 14.4mm">
+        <div class="f-7pt">Renvoyer a I’expediteur après</div>
+        <div class="pt-5 f-7pt">Возвратить отправителю после</div>
+      </div>
+
+      <div class="abs b" style="top: 31mm; left: 61.4mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 32.8mm; left: 72.4mm">
+        <div class="f-7pt">Jours</div>
+        <div class="pt-5 f-7pt">Дней</div>
+      </div>
+
+      <div class="abs b" style="top: 44.6mm; left: 3.4mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 44.6mm; left: 14.4mm">
+        <div class="f-7pt">Reexpedier au destinataire</div>
+        <div class="pt-5 f-7pt">a I’adresse ci-dessous</div>
+        <div class="pt-5 f-7pt">Дослать отправителю по адресу ниже</div>
+      </div>
+
+      <div class="abs b" style="top: 58.5mm; left: 3.4mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 59.6mm; left: 14.4mm">
+        <div class="f-7pt">Renvoyer Immedlatement a I’expediteur</div>
+        <div class="pt-5 f-7pt">Возвратить сразу же отправителю</div>
+      </div>
+
+      <div class="abs b" style="top: 71.4mm; left: 3.4mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 71.4mm; left: 14.4mm">
+        <div class="f-7pt">Traiter comme abandonne</div>
+        <div class="pt-5 f-7pt">Рассматривать как отправление</div>
+        <div class="pt-5 f-7pt">От которого отказался адресат</div>
+      </div>
+
+      <div class="abs" style="top: 85mm; left: 3.4mm">
+        <div class="f-7pt">Renvoyer /</div>
+        <div class="pt-5 f-7pt">Reexpedier</div>
+        <div class="pt-10 f-7pt">Возвратить /</div>
+        <div class="pt-5 f-7pt">Дослать</div>
+      </div>
+
+      <div class="abs b" style="top: 85mm; left: 26.5mm; height: 8.6mm; width: 8.6mm"></div>
+      <div class="abs" style="top: 85mm; left: 38mm">
+        <div class="f-7pt">par voie de</div>
+        <div class="pt-5 f-7pt">surface / S.A.L.</div>
+        <div class="pt-5 f-7pt">наземным путем</div>
+        <div class="pt-5 f-7pt">/ S.A.L.</div>
+      </div>
+
+      <div class="abs b" style="top: 85mm; left: 61.4mm; height: 8.6mm; width: 8.6mm">
+        <div class="pt-5" style="font-size: 18pt; padding-left: 1.5mm">✓</div>
+      </div>
+      <div class="abs" style="top: 85mm; left: 72mm">
+        <div class="f-7pt">par avion</div>
+        <div class="pt-5 f-7pt">авиа</div>
+      </div>
+
+      <div class="abs" style="top: 105mm; left: 3.4mm">
+        <div class="f-7pt">Adresse</div>
+        <div class="pt-5 f-7pt">Адрес</div>
+      </div>
+
+      <div class="abs" style="top: 102mm; left: 16.8mm">
+        <div class="f-10pt"></div>
+        <div class="pt-5 f-10pt"></div>
+        <div class="pt-5 f-10pt"></div>
+        <div class="pt-5 f-10pt"></div>
+        <div class="pt-5 f-10pt"></div>
+        <div class="pt-5 f-10pt"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trackings_cp71">
+    <div class="b bl-off bb-off rel" style="height: 72.6mm">
+      <div class="pl-23 pt-10 bold" style="font-size: 12pt">BULLETIN D’EXPEDITION</div>
+      <div class="pl-23 f-6pt">№ du/des colis (code a barriers sill existe)</div>
+      <div class="pl-23 pt-10 bold" style="font-size: 12pt">СОПРОВОДИТЕЛЬНЫЙ адрес</div>
+      <div class="pl-23 f-6pt">№ посылки (возможно штриховой код)</div>
+
+      <div class="abs" style="top: 15.5mm; left: 2.3mm">
+        <% packages.each do |package| %>
+          <% if packages.count > 15 %>
+            <div class="f-8pt">
+              <strong><%= package.tracking %></strong>
+              <%= package.package_items.map(&:description).join("\n") %>
+            </div>
+          <% else %>
+            <div class="f-9pt">
+              <strong><%= package.tracking %></strong>
+              <%= package.package_items.map(&:description).join("\n") %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="b bl-off bb-off rel" style="height: 29mm">
+      <div class="pl-23 pt-21 f-8pt">Declaration</div>
+      <div class="pl-23 pt-5 f-8pt">Du destinataire</div>
+      <div class="pl-23 pt-5 f-8pt">Расписка</div>
+      <div class="pl-23 pt-5 f-8pt">адресата</div>
+
+      <div class="abs bl" style="top: 0; left: 27.8mm; height: 28.9mm"></div>
+      <div class="abs" style="top: 1mm; left: 29mm">
+        <div class="f-7pt">Jai recu le colis decrit sur ce bulletin</div>
+        <div class="pt-5 f-7pt">Я получил посылку, описание, которое даётся</div>
+        <div class="pt-5 f-7pt">в настоящем сопроводительном  адресе</div>
+        <div class="pt-10 f-7pt">Date et signature du destenataire</div>
+        <div class="pt-5 f-7pt">Дата и подпись получателя</div>
+      </div>
+    </div>
+
+    <div class="b bl-off rel" style="height: 42.5mm">
+      <div class="pl-23 pt-10 f-7pt">Je certife que cet envoi ne contient aucun objet  dangereux</div>
+      <div class="pl-23 pt-5 f-7pt">Interdit par la reglamentation postale. J accepte aussi de payer les frais</div>
+      <div class="pl-23 pt-5 f-7pt">deoculant de lexecution des instructions donnees cicontre en cas</div>
+      <div class="pl-23 pt-5 f-7pt">de non-livraison</div>
+      <div class="pl-23 pt-10 f-7pt">Подтверждаю, что это отправление не содержит никаких опасных</div>
+      <div class="pl-23 pt-5 f-7pt">предметов, запрещенных почтовой регламентацией.</div>
+      <div class="pl-23 pt-5 f-7pt">Обязуюсь также оплатить расходы, связанные с выполнением</div>
+      <div class="pl-23 pt-5 f-7pt">инструкций, данных напротив, в случае невыдачи</div>
+
+      <div class="abs pl-23" style="bottom: 1mm">
+        <div class="f-8pt">Data et signature de I exediteur</div>
+        <div class="pt-5 f-8pt">Дата и подпись отправителя</div>
+      </div>
+
+      <div class="abs f-10pt" style="right: 29.4mm; bottom: 2.6mm"><%= shipment.created_at.to_date %></div>
+      <img class="abs" style="bottom: 1mm; right: 5mm; height: 16mm" src="<%= asset_pack_path 'media/images/signature_marat.jpg' %>">
+    </div>
+  </div>
+</div>
+<div class="page-break"></div>

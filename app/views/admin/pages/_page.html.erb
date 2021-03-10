@@ -1,0 +1,14 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <div class="d-flex">
+      <h5 class="card-title mr-2"><%= page.title %></h5>
+      <%= link_to edit_admin_page_path(page), class: "text-secondary mr-1" do %>
+        <i class="far fa-edit"></i>
+      <% end %>
+      <%= link_to admin_page_path(page), class: "text-secondary", method: :delete, data: { confirm: t("confirmation") } do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    </div>
+    <h6 class="card-subtitle text-muted">/<%= page.slug %></h6>
+  </div>
+</div>

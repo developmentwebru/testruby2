@@ -1,0 +1,7 @@
+ru:
+  admin:
+    site_settings:
+      edit:
+        title: "Изменить настройки сайта"
+      update:
+        notice: "Настройки сайта обновлены"

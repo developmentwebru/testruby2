@@ -1,0 +1,13 @@
+en:
+  admin:
+    users:
+      index:
+        title: "Users"
+        search_placeholder: "Name, Last name, email or phone number"
+        search: "Search"
+        filter_admins: "Show only admin users"
+      registrations:
+        signed_up_users: "Signed up users in last time"
+        signed_up_last_week: "Week"
+        signed_up_last_month: "Month"
+        signed_up_last_three_months: "3 months"

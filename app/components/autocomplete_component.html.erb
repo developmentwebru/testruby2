@@ -1,0 +1,4 @@
+<div data-controller="autocomplete" data-autocomplete-url="<%= @url %>" class="position-relative">
+  <%= @form_object.input @input_name, input_html: { "data-action": "input->autocomplete#onInputChange keydown->autocomplete#handleNavigationKeys blur->autocomplete#onBlur", "data-target": "autocomplete.input #{@stimulus_targets}" } %>
+  <ul data-target="autocomplete.output" class="list-unstyled bg-white shadow position-absolute" style="z-index: 10; width: 200px"></ul>
+</div>

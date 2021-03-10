@@ -1,0 +1,4 @@
+<h3><%= @news.title %></h3>
+<p><%= @news.content.html_safe %></p>
+<br>
+<p>© <%= SiteConfig.site_name %> <%= Date.current.year %></p>

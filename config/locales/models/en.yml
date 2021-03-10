@@ -1,0 +1,63 @@
+en:
+  activerecord:
+    models:
+      guest: "Guest"
+      package: "Package"
+      package_item: "Package Item"
+      package_photo: "Package Photo"
+      news: "News"
+      page: "Page"
+      passport: "Passport"
+      shipment: "Shipment"
+      shipment_next_date: "Date of the next shipment"
+      site_pricing: "Pricing settings"
+      site_setting: "Site settings"
+    attributes:
+      guest:
+        first_name: "First name"
+        last_name: "Last name"
+      package:
+        tracking: "Tracking"
+        weight: "Weight"
+        carrier: "Carrier"
+        status_warehouse:
+          in_transit: "USA: In transit to warehouse"
+          delivered: "USA: Arrived at warehouse"
+      package_item:
+        description: "Description"
+        price: "Price"
+        qty: "Qty"
+      shipment:
+        status:
+          preparing: "Preparing for shipment"
+          in_transit: "In transit to Bishkek"
+          arrived: "Arrived in Bishkek"
+      shipment_next_date:
+        date: "Date"
+      news:
+        title: "Title"
+        content: "Content"
+      page:
+        slug: "Slug"
+        title: "Title"
+        content: "Content"
+      passport:
+        first_name: "First name"
+        last_name: "Last name"
+        phone: "Mobile number"
+        address_line: "Address line"
+        address_city: "City"
+        address_zipcode: "Zipcode"
+        photos: "Passport photos"
+      user:
+        locale: "Website language"
+      site_pricing:
+        shipping_local: "Shipping cost (in local currency)"
+        shipping_usd: "Shipping cost (in USD)"
+      site_setting:
+        site_name: "Site name"
+        site_name_short: "Site name shortened"
+        domain: "Domain"
+        country: "Country"
+        country_code: "Country code (2 letter)"
+        contact_phone_numbers: "Contact phone numbers"

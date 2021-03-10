@@ -1,0 +1,16 @@
+en:
+  navbar:
+    find_tracking: "Find tracking"
+    services: "Our services"
+    about_us: "About us"
+    pricing: "Pricing"
+    terms: "Terms and conditions"
+    prohibited_items: "Prohibited items"
+    working_hours: "Working hours"
+    news: "News"
+    contact_us: "Contact us"
+    packages: "Packages"
+    our_us_address: "Our US address"
+    my_us_address: "My US address"
+    account: "Account"
+    logout: "Logout"

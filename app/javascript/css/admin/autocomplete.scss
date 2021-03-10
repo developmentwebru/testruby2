@@ -1,0 +1,22 @@
+.autocomplete-suggestions {
+  @extend .border, .bg-white, .rounded;
+  overflow: auto;
+}
+
+.autocomplete-suggestion {
+  @extend .px-3, .py-1, .border-bottom;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.autocomplete-suggestion:last-child {
+  border-bottom: none !important;
+}
+
+.autocomplete-selected {
+  @extend .text-white, .bg-primary;
+}
+
+.autocomplete-suggestions strong {
+  font-weight: normal;
+  color: inherit;
+}

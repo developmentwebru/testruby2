@@ -1,0 +1,63 @@
+ru:
+  activerecord:
+    models:
+      guest: "Гость"
+      package: "Посылка"
+      package_item: "Товар"
+      package_photo: "Фото посылки"
+      news: "Новость"
+      page: "Страница"
+      passport: "Паспортные данные"
+      shipment: "Отправление"
+      shipment_next_date: "Дата следующего отправления"
+      site_pricing: "Настройки тарифов"
+      site_setting: "Настройки сайта"
+    attributes:
+      guest:
+        first_name: "Имя"
+        last_name: "Фамилия"
+      package:
+        tracking: "Tracking номер"
+        weight: "Вес"
+        carrier: "Carrier"
+        status_warehouse:
+          in_transit: "USA: В пути на склад"
+          delivered: "USA: Доставлено на склад"
+      package_item:
+        description: "Описание товара"
+        price: "Цена"
+        qty: "Кол-во"
+      shipment:
+        status:
+          preparing: "Подготовка к отправке"
+          in_transit: "На пути в Бишкек"
+          arrived: "В Бишкеке"
+      shipment_next_date:
+        date: "Дата"
+      news:
+        title: "Заголовок"
+        content: "Содержимое"
+      page:
+        slug: "Slug"
+        title: "Заголовок"
+        content: "Содержимое"
+      passport:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        phone: "Номер мобильного телефона"
+        address_line: "Адрес"
+        address_city: "Город"
+        address_zipcode: "Почтовый индекс"
+        photos: "Фото паспорта"
+      user:
+        locale: "Язык интерфейса"
+      site_pricing:
+        shipping_local: "Цена за доставку (в нац. валюте)"
+        shipping_usd: "Цена за доставку (в дол. США)"
+      site_setting:
+        site_name: "Название сайта"
+        site_name_short: "Сокращенное название сайта"
+        domain: "Домен"
+        country: "Страна"
+        country_code: "Код страны (2 буквы)"
+        contact_phone_numbers: "Контактные телефоны"

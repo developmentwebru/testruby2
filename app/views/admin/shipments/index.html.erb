@@ -1,0 +1,45 @@
+<%= content_for :title do %>
+  <%= t(".title") %>
+<% end %>
+
+<h2 class="mb-3"><%= t(".title") %></h2>
+<% if current_user.super_admin? %>
+  <%= form_with url: admin_shipments_path do |f| %>
+    <div class="border rounded-sm col-md-4 p-3 shadow-sm">
+      <div class="form-group row">
+        <%= f.label :pending_packages, t(".packages_qty"), class: "col-6 col-form-label" %>
+        <div class="col-6">
+          <%= f.text_field :pending_packages, value: Package.pending.count, class: "form-control", readonly: true %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :pending_weight, t(".weight_total"), class: "col-6 col-form-label" %>
+        <div class="col-6">
+          <%= f.text_field :pending_weight, value: "#{Package.pending_weight} #{t("weight_kg")}", class: "form-control", readonly: true %>
+        </div>
+      </div>
+      <div class="text-right">
+        <%= f.submit t(".create"), class: "btn btn-primary" %>
+        <%= link_to t(".invoice"), pending_invoice_admin_shipments_path(format: :xlsx), class: "ml-2 btn btn-outline-primary" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="my-4 table-responsive">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="align-middle"><%= t(".date_of_shipment") %></th>
+        <th scope="col" class="align-middle" style="max-width: 100px"><%= t(".packages_qty") %></th>
+        <th scope="col" class="align-middle"><%= t(".weight_total") %></th>
+        <th scope="col" class="align-middle"><%= t(".status") %></th>
+        <th scope="col" class="align-middle"><%= t(".documents") %></th>
+        <th scope="col" class="align-middle">Air WayBill</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @shipments %>
+    </tbody>
+  </table>
+</div>

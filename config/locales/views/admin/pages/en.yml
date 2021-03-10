@@ -1,0 +1,16 @@
+en:
+  admin:
+    pages:
+      index:
+        title: "Static pages"
+        add_page: "Add new page"
+      new:
+        title: "Add new page"
+      create:
+        notice: "Page created"
+      edit:
+        title: "Edit page"
+      update:
+        notice: "Page updated"
+      destroy:
+        alert: "Page deleted"

@@ -1,0 +1,5 @@
+en:
+  passports:
+    new:
+      title: "Sign up"
+      photos_are_required: "Photos or scans of your passport (2 sides) are required for customs clearance"

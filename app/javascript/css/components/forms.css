@@ -1,0 +1,31 @@
+/* Remove spin buttons for number inputs */
+input.no-spin[type=number]::-webkit-inner-spin-button,
+input.no-spin[type=number]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.form-field {
+  @apply
+    appearance-none
+    block
+    w-full
+    leading-tight
+    text-black
+    p-2
+    border
+    rounded;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-field:focus {
+  @apply
+    border-blue-light;
+  outline: none;
+  box-shadow: 0 0 6px rgba(27,106,201,0.5);
+}
+
+/* Hide delete icon of first item in New Package form */
+#package_items .nested-fields:nth-child(1) a.remove_fields {
+  display: none !important;
+}

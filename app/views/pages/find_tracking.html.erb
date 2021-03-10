@@ -1,0 +1,14 @@
+<%= content_for :title do %>
+  Поиск трек-номера
+<% end %>
+
+<div class="text-center max-w-sm mx-auto">
+  <h1 class="mb-3">Поиск трек-номера</h1>
+  <p class="mb-4">Пожалуйста введите трек-номер или последние 6 цифр вашего трек-номера чтобы узнать статус посылки</p>
+  <%= form_with url: find_tracking_path, method: :get do |f| %>
+    <%= f.text_field :q, placeholder: t(".tracking"), class: "form-field mb-3" %>
+    <%= f.submit t(".search"), class: "btn btn-primary" %>
+  <% end %>
+
+  <div id="package" class="mt-6"></div>
+</div>

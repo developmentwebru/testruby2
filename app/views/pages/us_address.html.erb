@@ -1,0 +1,32 @@
+<%= content_for :title do %>
+  Адрес нашего склада в США
+<% end %>
+
+<div>
+  <h1 class="mb-3">Адрес нашего склада в США</h1>
+  
+  <h4>Street address:</h4>
+  <h2 class="mb-3"><%= SiteConfig.us_address_line %></h2>
+
+  <% if current_user %>
+    <h4>Street address (line 2):</h4>
+    <h2 class="mb-3">
+      Suite <%= SiteConfig.site_country_code %>-<%= 1000 + current_user.id %>
+    </h2>
+  <% end %>
+
+  <h4>City:</h4>
+  <h2 class="mb-3"><%= SiteConfig.us_address_city %></h2>
+
+  <h4>State / Province / Region:</h4>
+  <h2 class="mb-3"><%= SiteConfig.us_address_state %></h2>
+
+  <h4>Zipcode:</h4>
+  <h2 class="mb-3"><%= SiteConfig.us_address_zipcode %></h2>
+
+  <h4>Phone:</h4>
+  <h2 class="mb-3"><%= SiteConfig.us_address_phone %></h2>
+
+  <h4>Country:</h4>
+  <h2>United States (US)</h2>
+</div>

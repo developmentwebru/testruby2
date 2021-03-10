@@ -1,0 +1,5 @@
+<% @data.each do |item| %>
+  <li data-target="autocomplete.result" data-action="mousedown->autocomplete#onMouseDown click->autocomplete#onMouseClick" class="px-2 py-1" style="cursor: pointer">
+    <%= item %>
+  </li>
+<% end %>

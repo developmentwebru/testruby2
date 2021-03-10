@@ -1,0 +1,7 @@
+en:
+  admin:
+    shipment_next_dates:
+      edit:
+        title: "Edit date of the next shipment"
+      update:
+        notice: "Date of the next shipment is updated"

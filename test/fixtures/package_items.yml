@@ -1,0 +1,11 @@
+one:
+  description: Flip-flops
+  price: 14.56
+  qty: 2
+  package: one
+
+two:
+  description: Pair of jeans
+  price: 59.99
+  qty: 1
+  package: two

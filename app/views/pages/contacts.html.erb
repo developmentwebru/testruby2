@@ -1,0 +1,15 @@
+<%= content_for :title do %>
+  Контакты
+<% end %>
+
+<h1 class="mb-3 text-center">Контакты</h1>
+<h3>Наш адрес:</h3>
+<%= SiteConfig.office_address %>
+
+<h3 class="mt-2">Телефоны:</h3>
+<%= render(ContactComponent.new(contact: SiteConfig.contact1)) %>,
+<%= render(ContactComponent.new(contact: SiteConfig.contact2)) %>
+
+<div class="mt-5">
+  <iframe width="900" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJeR8bdMa3njgRytXYlIl8zHQ&key=AIzaSyB0q2h110tq07bUEMXZDyfTyLSmwXtXIUA" allowfullscreen></iframe>
+</div>

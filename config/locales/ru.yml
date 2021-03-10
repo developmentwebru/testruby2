@@ -1,0 +1,32 @@
+ru:
+  home: "Главная"
+  confirmation: "Вы уверены?"
+  cancel: "Отмена"
+  weight_kg: "кг"
+  qty: "кол-во"
+  and: "и"
+  or: "или"
+  destroy: "Удалить"
+  layouts:
+    print:
+      title: "Печать"
+  devise:
+    back_to_sign_in: "Назад к Войти"
+  time:
+    formats:
+      shorty: "%d %b %Y %H:%M"
+  datetime:
+    created_at: "Создана"
+    updated_at: "Обновлена"
+    processed_at: "Обработана"
+    received_at: "Получена"
+  uploads:
+    qrcode: "QR-код"
+    qrcode_package: "QR-код посылки"
+    uploaded_files: "Загруженные файлы"
+  errors:
+    file:
+      max_size: "размер файла должен быть меньше чем %{max}"
+      min_size: "размер файла должен быть больше чем %{min}"
+      mime_type_inclusion: "тип файла должен быть один из: %{list}"
+      extension_inclusion: "расширение файла должно быть одно из: %{list}"

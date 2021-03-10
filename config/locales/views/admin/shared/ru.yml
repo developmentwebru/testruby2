@@ -1,0 +1,17 @@
+ru:
+  admin:
+    shared:
+      navbar:
+        packages: "Посылки"
+        shipments: "Отправления"
+        users: "Пользователи"
+        settings: "Настройки"
+        news: "Новости"
+        pages: "Страницы"
+        site_pricing: "Настройки тарифов"
+        site_setting: "Настройки сайта"
+        autocomplete_package_item_descriptions: "Описание посылок для автозаполнения"
+        homepage: "Главная"
+      shipment_next_date:
+        label: "Дата следующей отправки груза"
+        edit: "Изменить"

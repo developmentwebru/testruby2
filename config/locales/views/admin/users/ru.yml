@@ -1,0 +1,13 @@
+ru:
+  admin:
+    users:
+      index:
+        title: "Пользователи"
+        search_placeholder: "Имя, фамилия, email или телефон"
+        search: "Поиск"
+        filter_admins: "Показать только администраторов"
+      registrations:
+        signed_up_users: "Регистрации за последнее время"
+        signed_up_last_week: "Неделя"
+        signed_up_last_month: "Месяц"
+        signed_up_last_three_months: "3 месяца"

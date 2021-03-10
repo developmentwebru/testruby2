@@ -1,0 +1,17 @@
+en:
+  admin:
+    shared:
+      navbar:
+        packages: "Packages"
+        shipments: "Shipments"
+        users: "Users"
+        settings: "Settings"
+        news: "News"
+        pages: "Pages"
+        site_pricing: "Pricing settings"
+        site_setting: "Site settings"
+        autocomplete_package_item_descriptions: "Package descriptions for autocomplete"
+        homepage: "Homepage"
+      shipment_next_date:
+        label: "Next shipment date"
+        edit: "Edit"

@@ -1,0 +1,20 @@
+<%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record? } do %>
+  <div class="form-row">
+    <div class="form-group col-12 col-md-7">
+      <%= render(AutocompleteComponent.new(form_object: form, input_name: :description, url: admin_autocomplete_package_description_url)) %>
+    </div>
+    <div class="form-group col-6 col-md-2">
+      <%= form.input :price, input_html: { class: "no-spin" } %>
+    </div>
+    <div class="form-group col-4 col-md-2">
+      <%= form.input :qty, input_html: { class: "no-spin" } %>
+    </div>
+    <div class="form-group col-2 col-md-1">
+      <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "ml-1 d-flex", style: "margin-top: 40px" do %>
+        <%= octicon "x", width: 24 %>
+      <% end %>
+    </div>
+
+    <%= form.hidden_field :_destroy %>
+  </div>
+<% end %>

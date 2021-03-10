@@ -1,0 +1,18 @@
+ru:
+  admin:
+    news:
+      index:
+        title: "Новости"
+        add_news: "Добавить новость"
+      new:
+        title: "Добавить новость"
+      create:
+        notice: "Новость добавлена"
+      edit:
+        title: "Изменить новость"
+      update:
+        notice: "Новость обновлена"
+      destroy:
+        alert: "Новость удалена"
+      form:
+        notify_users: "Отправить e-mail уведомление пользователям"

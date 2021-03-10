@@ -1,0 +1,42 @@
+version: "3.8"
+
+x-dev-environment: &dev-environment
+  NODE_ENV: development
+  RAILS_ENV: development
+  DATABASE_URL: postgres://postgres:postgres@db
+
+x-dev-volumes: &dev-volumes
+  - .:/els:cached
+  - bundle:/usr/local/bundle
+  - node_modules:/els/node_modules
+  - packs:/els/public/packs
+
+x-dev-service: &dev-service
+  env_file:
+    - .env
+  environment: *dev-environment
+  volumes: *dev-volumes
+
+services:
+  rails:
+    <<: *dev-service
+    environment:
+      <<: *dev-environment
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+
+  webpacker:
+    <<: *dev-service
+    command: ["./bin/webpack-dev-server"]
+    environment:
+      <<: *dev-environment
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    ports:
+      - "3035:3035"
+
+  worker:
+    <<: *dev-service
+
+volumes:
+  bundle:
+  node_modules:
+  packs:

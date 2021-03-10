@@ -1,0 +1,24 @@
+<%= simple_form_for @package, wrapper: :form do |f| %>
+  <%= f.input :tracking, autofocus: true, input_html: { class: "w-3/5" } %>
+
+  <div data-controller="nested-form">
+    <template data-target="nested-form.template">
+      <%= f.simple_fields_for :package_items, PackageItem.new, child_index: "NEW_RECORD" do |package_item| %>
+        <%= render "package_item_fields", form: package_item %>
+      <% end %>
+    </template>
+
+    <%= f.simple_fields_for :package_items do |package_item| %>
+      <%= render "package_item_fields", form: package_item %>
+    <% end %>
+
+    <div data-target="nested-form.links">
+      <%= link_to "Добавить товар", "#", class: "btn btn-sm", data: { action: "click->nested-form#add_association" } %>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <%= f.button :submit, class: "mr-2" %>
+    <%= link_to t("cancel"), packages_path, class: "text-grey-dark hover:text-blue" %>
+  </div>
+<% end %>

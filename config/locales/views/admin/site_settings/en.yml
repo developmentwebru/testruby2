@@ -1,0 +1,7 @@
+en:
+  admin:
+    site_settings:
+      edit:
+        title: "Edit site settings"
+      update:
+        notice: "Site settings updated"

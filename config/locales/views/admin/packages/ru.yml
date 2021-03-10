@@ -1,0 +1,28 @@
+ru:
+  admin:
+    packages:
+      index:
+        title: "Посылки"
+        add_or_edit: "Добавить или изменить"
+        tracking: "Трек-код"
+        search_by_name_placeholder: "Имя или Фамилия"
+        search_by_name: "Поиск"
+        search_placeholder: "Трек-номер"
+        search: "Поиск"
+        reset_search: "Сбросить поиск"
+      new:
+        title: "Добавить посылку"
+      edit:
+        title: "Редактировать посылку"
+      create:
+        notice: "Посылка добавлена"
+      update:
+        notice: "Посылка обновлена"
+      destroy:
+        alert: "Посылка удалена"
+      set_as_received:
+        notice: "Посылка %{tracking_number} получена"
+        alert: "Посылка %{tracking_number} уже получена"
+      form:
+        add_package_item: "Добавить товар"
+        package_photos: "Фото посылки"

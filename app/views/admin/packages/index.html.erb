@@ -1,0 +1,76 @@
+<%= content_for :title do %>
+  <%= t(".title") %>
+<% end %>
+
+<div class="d-flex align-items-center mb-3">
+  <h2 class="mr-2"><%= t(".title") %></h2>
+  <% if current_user.super_admin? %>
+  <h4>
+    <span class="mr-1 badge badge-font-500 badge-pill badge-primary">
+      <%= Package.pending.count %>
+    </span>
+    <span class="badge badge-font-500 badge-pill badge-secondary">
+      <%= Package.pending_weight %>
+      <%= t("weight_kg") %>
+    </span>
+  </h4>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-5 mb-2 mb-md-0">
+    <%# Add or edit packages %>
+    <% if current_user.super_admin? %>
+      <%= form_tag new_or_edit_admin_packages_path, method: "get" do %>
+        <div class="input-group">
+          <%= text_field_tag :q, nil, autofocus: true, autocomplete: :off, required: true, placeholder: t(".tracking"),
+            class: "form-control" %>
+          <div class="input-group-append">
+            <span class="input-group-text text-muted cursor-not-allowed"><small>scan</small></span>
+          </div>
+        </div>
+      <% end %>
+    <%# Set as received %>
+    <% else %>
+      <%= form_tag set_as_received_admin_packages_path, method: "get" do %>
+        <div class="input-group">
+          <%= text_field_tag :q, nil, autofocus: true, autocomplete: :off, required: true, placeholder: t(".tracking"),
+            class: "form-control" %>
+          <div class="input-group-append">
+            <span class="input-group-text text-muted cursor-not-allowed"><small>scan</small></span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-md-3 offset-md-1 mb-2 mb-md-0">
+    <%= form_tag admin_packages_path, method: :get, class: "form-inline" do %>
+      <div class="input-group">
+        <%= text_field_tag "search_by_name", params[:search_by_name], placeholder: t(".search_by_name_placeholder"), class: "form-control" %>
+        <div class="input-group-append">
+          <%= submit_tag t(".search_by_name"), class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-3">
+    <%= form_tag admin_packages_path, method: :get, class: "form-inline" do %>
+      <div class="input-group">
+        <%= text_field_tag "search", params[:search], placeholder: t(".search_placeholder"), class: "form-control" %>
+        <div class="input-group-append">
+          <%= submit_tag t(".search"), class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+    <small class="text-right form-text"><%= link_to t(".reset_search"), admin_packages_path, class: "text-muted" %></small>
+  </div>
+</div>
+
+
+<div class="my-4">
+  <%= render @packages %>
+</div>
+
+<%== pagy_nav(@pagy) %>

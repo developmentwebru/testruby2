@@ -1,0 +1,9 @@
+<%= content_for :title do %>
+  <%= t(".title") %>
+<% end %>
+
+<h2 class="mb-3"><%= t(".title") %></h2>
+<%= link_to t(".add_page"), new_admin_page_path, class: "btn btn-primary" %>
+<div class="my-4">
+  <%= render @pages %>
+</div>

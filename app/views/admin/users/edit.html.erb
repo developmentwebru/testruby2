@@ -1,0 +1,21 @@
+<%= simple_form_for @profile, url: admin_user_path do |f| %>
+  <div class="form-group">
+    <%= f.input :first_name, label: false, placeholder: "Имя" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :last_name, label: false, placeholder: "Фамилия" %>
+  </div>
+
+  <h4>Фото паспорта</h4>
+  <%= render(FileUploadComponent.new(
+    form: f,
+    model_name: "profile",
+    model_instance: @profile,
+    nested_attributes_name: "passport_photos",
+    max_files: 5,
+    display_previews_and_destroy: true
+  )) %>
+
+  <%= f.button :submit, "Обновить профиль пользователя", class: "mt-3 btn-block" %>
+<% end %>

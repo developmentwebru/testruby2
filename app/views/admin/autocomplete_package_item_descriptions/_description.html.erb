@@ -1,0 +1,6 @@
+<li id="description-<%= description.id %>">
+  <%= description.value %>
+  <%= link_to admin_autocomplete_package_item_description_path(description), class: "text-secondary", method: :delete, data: { remote: true } do %>
+    <i class="far fa-trash-alt"></i>
+  <% end %>
+</li>

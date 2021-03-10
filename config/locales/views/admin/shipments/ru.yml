@@ -1,0 +1,23 @@
+ru:
+  admin:
+    shipments:
+      index:
+        title: "Отправления"
+        create: "Создать отправление"
+        invoice: "Инвойс"
+        date_of_shipment: "Дата отправления"
+        packages_qty: "Кол-во посылок"
+        weight_total: "Общий вес"
+        status: "Статус"
+        documents: "Документы"
+      create:
+        notice: "Отправление создано"
+        alert: "Невозможно создать отправление без добавленных посылок"
+      set_as_in_transit:
+        notice: "Статус отправления обновлен"
+      set_as_arrived:
+        notice: "Статус отправления обновлен"
+      shipment:
+        invoice: "Инвойс"
+        cp_71: "СР-71"
+        invoice_registry: "Реестр грузов"

@@ -1,0 +1,11 @@
+.store-card {
+  @apply block text-center border rounded w-32 py-3 px-4 mr-3;
+}
+
+.store-card:hover {
+  @apply shadow;
+}
+
+.store-card-img {
+  @apply w-24 h-24;
+}

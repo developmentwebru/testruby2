@@ -1,0 +1,73 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+  title       = s.add_style :b => true,
+                            :sz => 24,
+                            :alignment => { :horizontal => :center, :vertical => :center }
+  header      = s.add_style :b => true,
+                            :border => { :style => :thin, :color => "00" },
+                            :alignment => { :horizontal => :center, :vertical => :center }
+  wrap_text   = s.add_style :border => { :style => :thin, :color => "00" },
+                            :alignment => { :horizontal => :center, :vertical => :center, :wrap_text => true }
+  wrap_header = s.add_style :alignment => { :wrap_text => true }
+  footer      = s.add_style :b => true,
+                            :alignment => { :horizontal => :right, :vertical => :center, :wrap_text => true }
+
+  wb.add_worksheet(name: "Invoice") do |sheet|
+    sheet.merge_cells "B1:C1"
+
+    sheet.add_row [nil, "INVOICE"], :style => title
+    sheet.add_row [
+      SiteConfig.customs_forms_fill[:from_company],
+      nil,
+      nil,
+      SiteConfig.customs_forms_fill[:to_company]
+    ], :style => wrap_header
+    sheet.add_row [
+      "#{SiteConfig.customs_forms_fill[:from_address]}\n" \
+      "#{SiteConfig.customs_forms_fill[:from_city]}, #{SiteConfig.customs_forms_fill[:from_state]}",
+      nil,
+      nil,
+      SiteConfig.customs_forms_fill[:to_address]
+    ], :style => wrap_header
+    sheet.add_row [ nil ]
+    sheet.add_row [
+      SiteConfig.customs_forms_fill[:from_phone],
+      nil,
+      nil,
+      SiteConfig.customs_forms_fill[:to_phone]
+    ], :style => wrap_header
+    sheet.add_row [
+      SiteConfig.customs_forms_fill[:from_name],
+      nil,
+      nil,
+      SiteConfig.customs_forms_fill[:to_name]
+    ], :style => wrap_header
+
+    sheet.add_row [ nil ]
+
+    sheet.add_row ["First name", "Last name", "Address", "Tracking", "Weight", "Price", "Product description"], :style => header
+    @packages.each do |package|
+      sheet.add_row [
+        package.user ? package.user.profile&.first_name : package.guest.first_name,
+        package.user ? package.user.profile&.last_name : package.guest.last_name,
+        package.user ? package.user.profile&.address : "-",
+        package.tracking,
+        package.weight,
+        "$#{package.package_items.sum(&:price)}",
+        package.package_items.map do |p|
+          clothes = ["costume", "coat", "palto", "kurtka", "shtany", "jeans", "shirt", "брюки", "jacket", "tee", "t-shirt", "pants", "skirt", "hoodie", "костюм", "джинсы", "штаны", "рубашка", "кофта", "пальто", "pullover", "анорак", "blazer", "куртка", "футболка", "толстовка", "юбка"]
+          if p.description == "clothes"
+            p.description = clothes.sample
+          else
+            p.description
+          end
+        end.join("\n")
+        #package.package_items.map(&:description).join("\n")
+      ], :style => wrap_text, :types => :string
+    end
+
+    sheet.add_row [nil, nil, nil, nil, "#{@packages.sum(&:weight)}kg", "$#{@packages.items_price}"], :style => footer
+
+    sheet.column_widths 20, 20, 20, 36, 9, 9, 35
+  end
+end

@@ -1,0 +1,19 @@
+en:
+  packages:
+    index:
+      shipment_next_date_label: "Date of the next shipment"
+      shipment_next_date_label_new: "Date of the next shipment"
+      title: "Packages"
+      add_package: "Add new package"
+    new:
+      title: "Add new package"
+    create:
+      notice: "Package created"
+    destroy:
+      alert: "Package deleted"
+    form:
+      add_package_item: "Add item"
+    expected: "Expected"
+    warehouse: "Warehouse"
+    in_transit: "In transit"
+    arrived: "Arrived"

@@ -1,0 +1,32 @@
+en:
+  home: "Home"
+  confirmation: "Are you sure?"
+  cancel: "Cancel"
+  weight_kg: "kg"
+  qty: "qty"
+  and: "and"
+  or: "or"
+  destroy: "Destroy"
+  layouts:
+    print:
+      title: "Print"
+  devise:
+    back_to_sign_in: "Back to Login"
+  time:
+    formats:
+      shorty: "%d %b %Y %H:%M"
+  datetime:
+    created_at: "Created at"
+    updated_at: "Updated at"
+    processed_at: "Processed at"
+    received_at: "Received at"
+  uploads:
+    qrcode: "QR Code"
+    qrcode_package: "Package's QR Code"
+    uploaded_files: "Uploaded files"
+  errors:
+    file:
+      max_size: "file size must not be greater than %{max}"
+      min_size: "file size must not be less than %{min}"
+      mime_type_inclusion: "file type must be one of: %{list}"
+      extension_inclusion: "file extension must be one of: %{list}"

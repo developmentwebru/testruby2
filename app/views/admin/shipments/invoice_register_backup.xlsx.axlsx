@@ -1,0 +1,203 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+  borders                  = s.add_style :border => { :style => :thin, :color => "00" }
+  wrap_with_borders        = s.add_style :alignment => { :vertical => :center, :wrap_text => true },
+                                         :border => { :style => :thin, :color => "00" }
+  borders_text_wrap_center = s.add_style :alignment => { :horizontal => :center, :vertical => :center, :wrap_text => true },
+                                         :border => { :style => :thin, :color => "00" }
+
+  wb.add_worksheet do |sheet|
+    items_counter = 0
+    i_end = 6
+
+    sheet.add_row ["Пассажирская таможенная декларация для экспресс-грузов"], style: borders_text_wrap_center
+    sheet.merge_cells "A1:O1"
+
+    sheet.add_row [
+      "Отправитель (по общей накладной) \n" \
+      "#{SiteConfig.customs_forms_fill[:from_company]} \n" \
+      "#{SiteConfig.customs_forms_fill[:from_address]}, #{SiteConfig.customs_forms_fill[:from_city]}, " \
+      "#{SiteConfig.customs_forms_fill[:from_state]} \n" \
+      "#{SiteConfig.customs_forms_fill[:from_phone]}", # A
+      nil, nil, nil, nil, # B,C,D,E
+      "Получатель (по общей накладной) \n" \
+      "#{SiteConfig.customs_forms_fill[:to_company]} \n" \
+      "#{SiteConfig.customs_forms_fill[:to_address]} \n" \
+      "#{SiteConfig.customs_forms_fill[:to_phone]}", # F
+      nil, nil, nil, nil, # G,H,I,J
+      "А", # K
+      nil, nil, nil, # L,M,N
+      "ПТДЭГ | Особенность", # O
+    ], style: wrap_with_borders
+
+    sheet.add_row [
+      nil, # A
+      nil, nil, nil, nil, # B,C,D,E
+      nil, # F
+      nil, nil, nil, nil, # G,H,I,J
+      "Предшествующий документ", # K
+      nil, nil, nil, # L,M,N
+      "Кол-во листов" # O
+    ], style: wrap_with_borders
+
+    sheet.merge_cells "A2:E3"
+    sheet.merge_cells "F2:J3"
+    sheet.merge_cells "K2:N2"
+    sheet.merge_cells "K3:N3"
+
+    sheet.add_row [
+      "Общие сведения", # A
+      nil, nil, nil, nil, # B,C,D,E
+      "Сведения о товарах", # F
+      nil, nil, nil, nil, nil, nil, # G,H,I,J,K,L
+      "Сведения о документах", # M
+      nil, # N
+      "Примечание", # O
+    ], style: borders_text_wrap_center
+
+    sheet.merge_cells "A4:E4"
+    sheet.merge_cells "F4:L4"
+    sheet.merge_cells "M4:N4"
+
+    sheet.add_row [
+      "№\nп/п", # A
+      "Общая\nнакладная", # B
+      "Инд.\nнакладная", # C
+      "Инд.\nотправитель", # D
+      "Инд.\nполучатель", # E
+      "№\nп/п", # F
+      "Наименование", # G
+      "Код\nТН ВЭД\nЕАЭС", # H
+      "Кол-во", # I
+      "Вес\nбрутто", # J
+      "Валюта (USD),\nстоимость", # K
+      "Валюта (СОМ),стоимость\n в валюте\nгосударства члена", # L
+      "Код,\nпризнак", # M
+      "Дата,\nномер", # N
+      nil # O
+    ], style: borders_text_wrap_center
+
+    sheet.add_row [
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", nil
+    ], style: borders_text_wrap_center
+
+    sheet.merge_cells "O4:O6"
+    
+    @shipment.packages.includes([:guest, :profile]).order("profiles.first_name ASC, profiles.last_name ASC, guests.first_name ASC, guests.last_name ASC").each_with_index do |package, i|
+      package_first_item = package.package_items.first
+      
+      sheet.add_row [
+        i + 1,
+        package.tracking,
+        " ",
+        "ELS USA",
+        if package.user
+          Translit.convert("#{package.user.profile.first_name} #{package.user.profile.last_name}", :russian)
+        else
+          Translit.convert("#{package.guest.first_name} #{package.guest.last_name}", :russian)
+        end,
+        items_counter += 1,
+        if package_first_item.description == "clothes"
+          clothes = ["costume", "coat", "palto", "kurtka", "shtany", "jeans", "shirt", "брюки", "jacket", "tee", "t-shirt", "pants", "skirt", "hoodie", "костюм", "джинсы", "штаны", "рубашка", "кофта", "пальто", "pullover", "анорак", "blazer", "куртка", "футболка", "толстовка", "юбка"]
+          clothes.sample
+        else
+          package_first_item.description
+        end, #package_first_item.description,
+        package_item_description_code(package_first_item.description),
+        package_first_item.qty,
+        if package.package_items.count == 1
+          package.weight
+        else
+          "-"
+        end,
+        package_first_item.price.to_s,
+        (package_first_item.price * 69.75).round(2).to_s,
+        " ",
+        " ",
+        " "
+      ], style: wrap_with_borders, types: [:string, :string, nil, :string, :string, :string, :string, :string, :string, :string, :string, :string, nil, nil, nil]
+
+      package.package_items.each_with_index do |item, i|
+        next if item.id == package_first_item.id
+        
+        sheet.add_row [
+          nil,
+          nil,
+          nil,
+          nil,
+          nil,
+          items_counter += 1,
+          item.description,
+          package_item_description_code(item.description),
+          item.qty,
+          if package.package_items.count == 1
+            package.weight
+          else
+            "-"
+          end,
+          item.price.to_s,
+          (item.price * 69.75).round(2).to_s,
+          " ",
+          " ",
+          " "
+        ], style: wrap_with_borders, types: [nil, nil, nil, nil, nil, :string, :string, :string, :string, :string, :string, :string, nil, nil, nil]
+      end
+
+      sheet.add_row [
+        nil,
+        "Всего по индивидуальной накладной (общий вес брутто, стоимость в валюте государства-члена)",
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        package.weight,
+        nil,
+        (package.package_items.sum(&:price) * 69.75).round(2).to_s,
+        " ",
+        " ",
+        " "
+      ], style: borders, types: [nil, :string, nil, nil, nil, nil, nil, nil, nil, :string, nil, :string, :string, :string, :string]
+
+      package_items_count = package.package_items.count
+      i_start = i_end + 1
+      i_end = i_start + package_items_count
+      sheet.merge_cells "A#{i_start}:A#{i_end}"
+
+      if package_items_count > 1
+        sheet.merge_cells "B#{i_start}:B#{i_end-1}"
+        sheet.merge_cells "C#{i_start}:C#{i_end-1}"
+        sheet.merge_cells "D#{i_start}:D#{i_end-1}"
+        sheet.merge_cells "E#{i_start}:E#{i_end-1}"
+      end
+
+      sheet.merge_cells "B#{i_end}:I#{i_end}"
+      sheet.merge_cells "M#{i_end}:O#{i_end}"
+    end
+
+    sheet.add_row [
+      "Всего по пассажирской таможенной декларации для экспресс-грузов (общий вес брутто, стоимость в валюте государства-члена)",
+      nil,
+      nil,
+      nil,
+      nil,
+      nil,
+      nil,
+      nil,
+      nil,
+      @shipment.packages.sum(&:weight),
+      nil,
+      (@shipment.packages.sum(&:items_price) * 69.75).round(2).to_s,
+      nil,
+      nil,
+      nil
+    ], style: wrap_with_borders, types: [:string, nil, nil, nil, nil, nil, nil, nil, nil, :string, nil, :string, nil, nil, nil]
+
+    sheet.merge_cells "A#{i_end+1}:I#{i_end+1}"
+    sheet.merge_cells "M#{i_end+1}:O#{i_end+1}"
+
+    sheet.column_widths 5, 30, 15, nil, nil, 5, 30, 13, 5, 8, 10, 10, 5, 5, 8
+  end
+end

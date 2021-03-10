@@ -1,0 +1,23 @@
+en:
+  admin:
+    shipments:
+      index:
+        title: "Shipments"
+        create: "Create shipment"
+        invoice: "Invoice"
+        date_of_shipment: "Date of shipment"
+        packages_qty: "Packages qty"
+        weight_total: "Weight total"
+        status: "Status"
+        documents: "Documents"
+      create:
+        notice: "Shipment created"
+        alert: "Can't create shipment, scan packages first"
+      set_as_in_transit:
+        notice: "Shipment status updated"
+      set_as_arrived:
+        notice: "Shipment status updated"
+      shipment:
+        invoice: "Invoice"
+        cp_71: "CP-71"
+        invoice_registry: "Invoice registry"
